@@ -87,6 +87,11 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  eleventyConfig.addFilter("getRandom", function(items) {
+    let selected = items[Math.floor(Math.random() * items.length)];
+    return selected;
+  });
+
   eleventyConfig.addFilter("unique", (arr=[]) => [...new Set(arr)]);
 
   eleventyConfig.setLibrary(

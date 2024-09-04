@@ -3,9 +3,14 @@ layout: layouts/home.njk
 permalink: 404.html
 eleventyExcludeFromCollections: true
 ---
-# Content not found.
 
-Go <a href="/">home</a>.
+# How'd you get here?
+
+![Not Found](https://http.cat/404)
+
+{% set randomPost = collections.posts | getRandom2: page %}
+
+<a href="{{randomPost.url}}">Go some where else</a>.
 
 <!--
 
