@@ -71,6 +71,7 @@ module.exports = function (eleventyConfig) {
 
   // Return all the tags used in a collection
   eleventyConfig.addFilter("getAllTags", (collection) => {
+    debugger;
     let tagSet = new Set();
     for (let item of collection) {
       (item.data.tags || []).forEach((tag) => tagSet.add(tag));
@@ -85,6 +86,8 @@ module.exports = function (eleventyConfig) {
         -1
     );
   });
+
+  eleventyConfig.addFilter("unique", (arr=[]) => [...new Set(arr)]);
 
   eleventyConfig.setLibrary(
     "md",
