@@ -3,6 +3,7 @@ const { DateTime } = require("luxon");
 const markdownIt = require("markdown-it");
 const markdownItEleventyImg = require("markdown-it-eleventy-img");
 const markdownItAnchor = require("markdown-it-anchor");
+const { tocPlugin } = require("@mdit-vue/plugin-toc");
 
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
@@ -87,12 +88,12 @@ module.exports = function (eleventyConfig) {
     );
   });
 
-  eleventyConfig.addFilter("getRandom", function(items) {
+  eleventyConfig.addFilter("getRandom", function (items) {
     let selected = items[Math.floor(Math.random() * items.length)];
     return selected;
   });
 
-  eleventyConfig.addFilter("unique", (arr=[]) => [...new Set(arr)]);
+  eleventyConfig.addFilter("unique", (arr = []) => [...new Set(arr)]);
 
   eleventyConfig.setLibrary(
     "md",
@@ -100,21 +101,23 @@ module.exports = function (eleventyConfig) {
       html: true,
       breaks: true,
       linkify: true,
-    }).use(markdownItEleventyImg, {
-      imgOptions: {
-        widths: [600, 300],
-        urlPath: "/images/",
-        outputDir: "./_site/images/",
-        formats: ["avif", "webp", "jpeg"],
-      },
-      globalAttributes: {
-        class: "markdown-image",
-        decoding: "async",
-        sizes: "100vw",
-      },
-      resolvePath: (filepath, env) =>
-        path.join(path.dirname(env.page.inputPath), filepath),
     })
+      .use(markdownItEleventyImg, {
+        imgOptions: {
+          widths: [600, 300],
+          urlPath: "/images/",
+          outputDir: "./_site/images/",
+          formats: ["avif", "webp", "jpeg"],
+        },
+        globalAttributes: {
+          class: "markdown-image",
+          decoding: "async",
+          sizes: "100vw",
+        },
+        resolvePath: (filepath, env) =>
+          path.join(path.dirname(env.page.inputPath), filepath),
+      })
+      .use(tocPlugin, {})
   );
 
   // Customize Markdown library settings:

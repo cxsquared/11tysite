@@ -9,9 +9,10 @@ tags:
   -  utf8
   -  programming
 description: A quick tip on how to handle different encodings with C#'s Process class.
-toc: true
 comments: true
 ---
+
+[[toc]]
 
 Recently at work I ran into a Unicode encoding issue. We using C#'s [Process]
 to run `powershell±mysqldump.exe` to create our SQL backups. Recently we discovered that any Unicode stored in our databases was mangled when we dumped the database. And I spent waaaaay too much time trying to figure out why this was happening so here's how I finally figured out how to fix it.

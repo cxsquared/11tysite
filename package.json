@@ -24,5 +24,8 @@
     "luxon": "^3.5.0",
     "markdown-it-anchor": "^9.1.0",
     "markdown-it-eleventy-img": "^0.10.2"
+  },
+  "dependencies": {
+    "@mdit-vue/plugin-toc": "^2.1.3"
   }
 }

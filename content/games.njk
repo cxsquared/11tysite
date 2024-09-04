@@ -4,7 +4,9 @@ eleventyNavigation:
   key: Games 
   order: 2
 ---
-<h1>Games</h1>
+<div class="box">
+  <h1>Games</h1>
 
-{% set postslist = collections.games %}
-{% include "postslist.njk" %}
+  {% set postslist = collections.games %}
+  {% include "postslist.njk" %}
+</div>

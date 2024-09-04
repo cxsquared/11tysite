@@ -5,8 +5,8 @@ pagination:
   alias: tag
   filter:
     - all
-    - games
-    - tutorials
+    - game
+    - tutorial
     - post
     - posts
     - tagList

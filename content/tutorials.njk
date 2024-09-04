@@ -4,7 +4,9 @@ eleventyNavigation:
   key: Tutorials 
   order: 2
 ---
-<h1>Tutorials</h1>
+<div class="box">
+  <h1>Tutorials</h1>
 
-{% set postslist = collections.tutorials %}
-{% include "postslist.njk" %}
+  {% set postslist = collections.tutorials %}
+  {% include "postslist.njk" %}
+</div>

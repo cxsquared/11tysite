@@ -7,6 +7,9 @@
         <meta
         name="description" content="{{ description or metadata.description }}"> {#- Atom and JSON feeds included by default #}
         <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
+        <link href="https://i.imgur.com/gJroawV.png" rel="icon" type="image/x-icon">
+ 
+        <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet" type="text/css">
         <link
         rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}"> {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
         <meta name="generator" content="{{ eleventy.generator }}"> {#-
@@ -18,9 +21,16 @@
                                                 		#}
         {#- Add an arbitrary string to the bundle #}{%- css %}* { box-sizing: border-box; }
         {% endcss %}
-        {#- Add the contents of a file to the bundle #}{%- css %}{% include "public/css/index.css" %}
+        {#- Add the contents of a file to the bundle #}
+        {%- css %}
+        {% include "public/css/index.css" %}
         {% endcss %}
-        {#- Or add from node_modules #}{%- css %}
+        {%- css %}
+        {% include "public/css/fonts.css" %}
+        {% endcss %}
+
+        {#- Or add from node_modules #}
+        {%- css %}
         {% include "node_modules/prismjs/themes/prism-funky.css" %}
         {% endcss %}
         {#- Render the CSS bundle using Inlined CSS (for the fastest site performance in production) #}
@@ -30,25 +40,29 @@
         {#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
     </head>
     <body>
-        <a href="#skip" class="visually-hidden">Skip to main content</a>
-        <header>
-            <a href="/" class="home-link">{{ metadata.title }}</a>
-            {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-            <nav>
-                <h2 class="visually-hidden">Top level navigation menu</h2>
-                <ul class="nav">
-                    {%- for entry in collections.all | eleventyNavigation %}
-                        <li class="nav-item">
-                            <a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.title }}</a>
-                        </li>
-                    {%- endfor %}
-                </ul>
-            </nav>
-        </header>
-        <main id="skip">
-            {{ content | safe }}
-        </main>
-        <footer></footer>
-        <!-- This page `{{ page.url | htmlBaseUrl }}` was built on {% currentBuildDate %} -->
+        <div id="real-body">
+            <a href="#skip" class="visually-hidden">Skip to main content</a>
+            <header class="box">
+                <div id="header-image">
+                </div>
+                <!--<a href="/" class="home-link">{{ metadata.title }}</a>-->
+                {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
+                <nav>
+                    <h2 class="visually-hidden">Top level navigation menu</h2>
+                    <ul class="nav">
+                        {%- for entry in collections.all | eleventyNavigation %}
+                            <li class="nav-item">
+                                <a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.title }}</a>
+                            </li>
+                        {%- endfor %}
+                    </ul>
+                </nav>
+            </header>
+            <main id="skip">
+                {{ content | safe }}
+            </main>
+            <footer></footer>
+            <!--This page `{{ page.url | htmlBaseUrl }}` was built on {% currentBuildDate %}-->
+        </div>
     </body>
 </html>

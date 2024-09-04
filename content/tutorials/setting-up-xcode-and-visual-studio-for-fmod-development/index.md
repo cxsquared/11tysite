@@ -13,6 +13,8 @@ comments: true
 toc: true
 ---
 
+[[toc]]
+
 This tutorial series is going to be all about starting out as an Audio Programmer using the middleware [FMOD](http://www.fmod.org/). I'll be going over setting up Xcode/Visual Studio to work with FMOD and creating a basic implementation that you can use in your C++ projects. It's probably good that you have some understanding of C++ but I'll only be covering very basic things so it shouldn't be too hard to follow along if you don't. By the end hopefully you'll have a better grasp on integrating audio middleware into C++ projects so you can start creating some awesome audio programming systems.
 
 I will say this isn't a tutorial on how to use [FMOD Studio](http://www.fmod.org/products/). While you'll be able to use FMOD Studio events with this audio engine, this tutorial is solely concentrating on the programming side of FMOD. If you want a good tutorial on FMOD Studio you should check out the tutorial series from my friend Chris Prunotto over on his site [SoundGuyChris.com](http://blog.soundguychris.com/2014/04/15/an-introduction-to-fmod-part-1/).

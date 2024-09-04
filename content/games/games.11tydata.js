@@ -1,6 +1,4 @@
 module.exports = {
-	tags: [
-		"games"
-	],
-	"layout": "layouts/post.njk",
+  tags: ["games"],
+  layout: "layouts/post.njk",
 };
