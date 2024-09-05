@@ -44,7 +44,7 @@
             <a href="#skip" class="visually-hidden">Skip to main content</a>
             <header class="box">
                 <div id="header-image" style="text-align: center;">
-                    <h1 class="rainbow-letters">{{ title or metadata.title }}</h1>
+                    <h1 class="rainbow-letters">{{ metadata.title }}</h1>
                 </div>
                 <!--<a href="/" class="home-link">{{ metadata.title }}</a>-->
                 {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
@@ -53,7 +53,7 @@
                     <ul class="nav">
                         {%- for entry in collections.all | eleventyNavigation %}
                             <li class="nav-item">
-                                <a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.title }}</a>
+                                <h3><a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.title }}</a></h3>
                             </li>
                         {%- endfor %}
                     </ul>
