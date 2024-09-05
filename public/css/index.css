@@ -1,6 +1,6 @@
 /* Defaults */
 :root {
-  --font-family: tif, -apple-system, system-ui, sans-serif;
+  --font-family: print, -apple-system, system-ui, sans-serif;
   --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
     Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
@@ -23,7 +23,7 @@
   --syntax-tab-size: 2;
 
   --header-img: url("https://cdn.pixabay.com/animation/2023/10/24/13/50/13-50-26-112_256.gif");
-  --background-img: url("/images/bg_tile.png");
+  --background-img: url("/images/bg_small.png");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -82,19 +82,20 @@ body {
   height: 100%;
   font-family: var(--font-family);
   color: var(--text-color);
-  background: var(--background-img) repeat;
-  -webkit-animation: scrolling 15s linear infinite;
-  -moz-animation: scrolling 15s linear infinite;
-  -o-animation: scrolling 15s linear infinite;
-  animation: scrolling 15s linear infinite;
+  background: var(--background-img);
+  background-repeat: repeat;
+  -webkit-animation: scrolling 7s linear infinite;
+  -moz-animation: scrolling 7s linear infinite;
+  -o-animation: scrolling 7s linear infinite;
+  animation: scrolling 7s linear infinite;
 }
 
 @keyframes scrolling {
   from {
-    background-position: bottom 0 left 0;
+    background-position: top 0 right 0;
   }
   to {
-    background-position: bottom 100% left 100%;
+    background-position: top 512px right 512px;
   }
 }
 
@@ -139,7 +140,8 @@ a[href]:active {
 }
 
 main {
-  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 main :first-child {
@@ -211,8 +213,9 @@ header {
   background-image: var(--header-img);
   background-size: cover;
   filter: hue-rotate(180deg);
-  height: 200px;
+  height: 100px;
   width: 100%;
+  background-position-y: 22%;
 }
 
 .home-link {
@@ -250,9 +253,9 @@ header {
 
 /* Body */
 #real-body {
-  max-width: 900px;
-  margin: 25px auto;
-  padding: 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 25px;
 }
 
 .box {
@@ -265,6 +268,7 @@ header {
 
 .box.music-player {
   padding: 0;
+  padding-top: 15px;
 }
 
 /* Table of Contents */
@@ -388,6 +392,29 @@ a[href].header-anchor:focus,
   color: #aaa;
 }
 
+h2 {
+  --font-family: tif, -apple-system, system-ui, sans-serif;
+}
+
 h2 + .header-anchor {
   font-size: 1.5em;
+}
+
+.social .boxbody {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.social img {
+  height: 32px;
+}
+
+.box .boxhead {
+  border-bottom: #aaa dotted 3px;
+  text-align: center;
+  line-height: 0.1;
+}
+
+.box .boxbody {
+  padding-top: 15px;
 }
