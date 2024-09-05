@@ -72,7 +72,6 @@ module.exports = function (eleventyConfig) {
 
   // Return all the tags used in a collection
   eleventyConfig.addFilter("getAllTags", (collection) => {
-    debugger;
     let tagSet = new Set();
     for (let item of collection) {
       (item.data.tags || []).forEach((tag) => tagSet.add(tag));
@@ -87,6 +86,13 @@ module.exports = function (eleventyConfig) {
         -1
     );
   });
+
+  eleventyConfig.addFilter("inputPathDir", (inputPath) => {
+    let splitDirs = inputPath.split('/')
+    splitDirs.pop()
+    splitDirs.splice(0, 2)
+    return splitDirs.join('/') 
+  })
 
   eleventyConfig.addFilter("getRandom", function (items) {
     let selected = items[Math.floor(Math.random() * items.length)];

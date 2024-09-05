@@ -5,37 +5,48 @@ eleventyNavigation:
   order: 1
 numberOfLatestPostsToShow: 3
 ---
+
 <div class="box music-player">
-	<iframe width="100%" height="350" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/7355881&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+    <h1>My Music</h1>
+    <iframe
+        width="100%"
+        height="350"
+        scrolling="no"
+        frameborder="no"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/7355881&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
 </div>
 <div class="social box">
-	<a href="https://twitter.com/Cxsquared" target="_blank"><img src="/images/logos/Twitter.png"></a>
-	<a href="https://github.com/cxsquared" target="_blank"><img src="/images/logos/Github.png"></a>
-	<a href="https://www.linkedin.com/in/cxsquared" target="_blank"><img src="/images/logos/LinkedIn.png"></a>
-</div>
-
-
-<div class="box">
-	{% set postsCount = collections.posts | length %}
-	{% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-	<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
-
-	{% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-	{% set postslistCounter = postsCount %}
-	{% include "postslist.njk" %}
-
-	{% set morePosts = postsCount - numberOfLatestPostsToShow %}
-	{% if morePosts > 0 %}
-	<p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/">the archive</a>.</p>
-	{% endif %}
-</div>
-
-
-<div class="box"> 
-	{# List every content page in the project #}
-	<ul>
-		{%- for entry in collections.all %}
-		<li><a href="{{ entry.url }}"><code>{{ entry.url }}</code></a></li>
-		{%- endfor %}
-	</ul>
-</div>
+    <h1>Socials</h1>
+    <a href="https://twitter.com/Cxsquared" target="_blank">
+        <img src="/images/logos/Twitter.png"></a>
+        <a href="https://github.com/cxsquared" target="_blank">
+            <img src="/images/logos/Github.png"></a>
+            <a href="https://www.linkedin.com/in/cxsquared" target="_blank">
+                <img src="/images/logos/LinkedIn.png"></a>
+            </div>
+            <div class="box">
+                {% set postsCount = collections.posts | length %}
+                {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
+                <h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}
+                </h1>
+                {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
+                {% set postslistCounter = postsCount %}
+                {% include "postslist.njk" %}
+                {% set morePosts = postsCount - numberOfLatestPostsToShow %}
+                {% if morePosts > 0 %}
+                    <p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %}
+                        can be found in
+                        <a href="/blog/">the archive</a>.</p>
+                {% endif %}
+            </div>
+            <div
+                class="box">
+                {# List every content page in the project #}
+                {% set mostRecentGame = collections.games | last %}
+                {% set mostRecentGameImgLocation = mostRecentGame.inputPath | inputPathDir %}
+                <h1>Most recent project</h1>
+                <a href="{{ mostRecentGame.url }}">
+                    <h2>{{ mostRecentGame.data.title }}</h2>
+                    {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image, mostRecentGame.data.title %}
+                </a>
+            </div>
