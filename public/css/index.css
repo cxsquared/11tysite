@@ -1,7 +1,8 @@
 /* Defaults */
 :root {
   --font-family: print, -apple-system, system-ui, sans-serif;
-  --font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono,
+  --font-family-header: tif, -apple-system, system-ui, sans-serif;
+  --font-family-monospace: Menlo, Consolas, Monaco, Andale Mono WT, Andale Mono,
     Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New,
     Courier, monospace;
@@ -112,6 +113,58 @@ html {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+#header-image h1 {
+  margin-top: 0px;
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 4rem;
+  letter-spacing: 1.25rem;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: -2px 2px #ef3550, -4px 4px #f48fb1, -6px 6px #7e57c2,
+    -8px 8px #2196f3, -10px 10px #26c6da, -12px 12px #43a047, -14px 14px #eeff41,
+    -16px 16px #f9a825, -18px 18px #ff5722;
+}
+
+.rainbow-letters span:nth-child(10n + 1) {
+  color: #ef5350;
+}
+
+.rainbow-letters span:nth-child(10n + 2) {
+  color: #ab47bc;
+}
+
+.rainbow-letters span:nth-child(10n + 3) {
+  color: #651fff;
+}
+
+.rainbow-letters span:nth-child(10n + 5) {
+  color: #3949ab;
+}
+
+.rainbow-letters span:nth-child(10n + 4) {
+  color: #2196f3;
+}
+
+.rainbow-letters span:nth-child(10n + 6) {
+  color: #00bcd4;
+}
+
+.rainbow-letters span:nth-child(10n + 7) {
+  color: #4caf50;
+}
+
+.rainbow-letters span:nth-child(10n + 8) {
+  color: #ffc107;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family-header);
 }
 
 p:last-child {
