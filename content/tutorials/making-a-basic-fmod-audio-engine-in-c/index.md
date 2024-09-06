@@ -5,7 +5,7 @@ category: tutorial
 tags: 
   - fmod
   - audio engine
-  - c++
+  - cpp
   - programming
 description: A tutorial about setting about a basic audio engine for video games in C++ using the Fmod API.
 comments: true

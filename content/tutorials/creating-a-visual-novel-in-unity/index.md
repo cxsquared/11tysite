@@ -2,8 +2,8 @@
 title: Creating a Visual Novel in Unity
 date: '2015-09-27'
 tags: 
-  - Unity
-  - Visual Novel
+  - unity
+  - visual novel
 category: tutorial
 comments: true
 ---

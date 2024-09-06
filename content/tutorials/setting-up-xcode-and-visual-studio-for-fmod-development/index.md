@@ -4,7 +4,7 @@ date: "2016-04-02"
 tags: 
   - fmod 
   - audio programming
-  - c++
+  - cpp
   - programming
   - visual studio
 category: tutorial

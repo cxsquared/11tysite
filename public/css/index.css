@@ -17,7 +17,7 @@
   --background-color: #fff;
 
   --text-color: var(--color-gray-90);
-  --text-color-link: #082840;
+  --text-color-link: #3b6a8f;
   --text-color-link-active: #5f2b48;
   --text-color-link-visited: #17050f;
 
@@ -37,9 +37,9 @@
     --color-gray-90: #dad8d8;
 
     /* --text-color is assigned to --color-gray-_ above */
-    --text-color-link: #1493fb;
-    --text-color-link-active: #6969f7;
-    --text-color-link-visited: #a6a6f8;
+    --text-color-link: #57b3ff;
+    --text-color-link-active: #9f9fff;
+    --text-color-link-visited: #c8c8fa;
 
     --background-color: #2f5c2e;
   }
@@ -135,6 +135,11 @@ html {
     -16px 16px #f9a825, -18px 18px #ff5722;
 }
 
+#header-image a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 .rainbow-letters span:nth-child(10n + 1) {
   color: #ef5350;
 }
@@ -174,11 +179,11 @@ h4 {
   font-family: var(--font-family-header);
 }
 
-nav h3 {
+h3 {
   color: var(--h3-color);
 }
 
-nav a[href]:visited {
+h3 a[href]:visited {
   color: var(--h3-color);
 }
 
@@ -490,4 +495,25 @@ h2 + .header-anchor {
 
 .box .boxbody {
   padding-top: 15px;
+}
+
+.blogpost {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.blogpost img {
+  width: 100px;
+  height: 100px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.blogpost .bloginfo {
+  padding: 10px;
+}
+
+.blogpost h3 {
+  margin: 3px;
 }

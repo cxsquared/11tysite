@@ -1,46 +1,49 @@
 ---
 layout: layouts/home.njk
 eleventyNavigation:
-  key: Home
-  order: 1
+    key: Home
+    order: 1
 numberOfLatestPostsToShow: 3
 ---
 
 {# Main content #}
-<div style="flex: 1;">
+<div style="flex: 1">
     <div class="box">
         <div class="boxhead">
             <h2>Welcome</h2>
         </div>
         <div class="boxbody">
-            <p>Welcome to my mind! Here lives a collection of my games, tutorials, music, and general blogs posts.</p>
             <p>
-                A bit about me...
-                <ul>
-                    <li>I help run the Indianapolis IGDA chapter</li>
-                    <li>I love hockey and motor sports</li>
-                    <li>I'm great at coming up with awfully brilliant fan fiction ideas and titles</li>
-                </ul>
+                Welcome to my mind! Here lives a collection of my games, tutorials,
+                music, and general blogs posts.
             </p>
-
+            <p>A bit about me...</p>
+            <ul>
+                <li>I help run the Indianapolis IGDA chapter</li>
+                <li>I love hockey and motor sports</li>
+                <li>
+                    I'm great at coming up with awfully brilliant fan fiction ideas and
+                    titles
+                </li>
+            </ul>
         </div>
     </div>
     <div class="box">
-        {% set postsCount = collections.posts | length %}
-        {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
+        {% set postsCount = collections.posts | length %} {% set latestPostsCount =
+        postsCount | min(numberOfLatestPostsToShow) %}
 
         <div class="boxhead">
-            <h2>Blog</h2>
+            <h2>Latest Posts</h2>
         </div>
         <div class="boxbody">
-            {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
-            {% set postslistCounter = postsCount %}
-            {% include "postslist.njk" %}
-            {% set morePosts = postsCount - numberOfLatestPostsToShow %}
-            {% if morePosts > 0 %}
-                <p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %}
-                    can be found in
-                    <a href="/blog/">the archive</a>.</p>
+            {% set postslist = collections.posts | head(-1 *
+            numberOfLatestPostsToShow) %} {% set postslistCounter = postsCount %} {%
+            include "postslist.njk" %} {% set morePosts = postsCount -
+            numberOfLatestPostsToShow %} {% if morePosts > 0 %}
+            <p>
+                {{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be
+                found in <a href="/blog/">the archive</a>.
+            </p>
             {% endif %}
         </div>
     </div>
@@ -54,24 +57,21 @@ numberOfLatestPostsToShow: 3
             {% set mostRecentGameImgLocation = mostRecentGame.inputPath | inputPathDir %}
             <a href="{{ mostRecentGame.url }}">
                 <h3>{{ mostRecentGame.data.title }}</h3>
-                {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image, mostRecentGame.data.title %}
+                {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image,
+                mostRecentGame.data.title %}
             </a>
         </div>
     </div>
 </div>
 
 {# Side Bar #}
-<div class="container" style="min-width: 30%; max-width: 30%;">
+<div class="container" style="min-width: 30%; max-width: 30%">
     <div class="box music-player">
         <div class="boxhead">
             <h2>My Music</h2>
         </div>
         <div class="boxbody">
-            <iframe
-                width="100%"
-                height="350px"
-                scrolling="no"
-                frameborder="no"
+            <iframe width="100%" height="350px" scrolling="no" frameborder="no"
                 src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/7355881&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
         </div>
     </div>
@@ -81,17 +81,14 @@ numberOfLatestPostsToShow: 3
         </div>
         <div class="boxbody">
             <a href="https://twitter.com/Cxsquared" target="_blank">
-                <img src="/images/logos/Twitter.png">
+                <img src="/images/logos/Twitter.png" />
             </a>
             <a href="https://github.com/cxsquared" target="_blank">
-                <img src="/images/logos/Github.png">
+                <img src="/images/logos/Github.png" />
             </a>
             <a href="https://www.linkedin.com/in/cxsquared" target="_blank">
-                <img src="/images/logos/LinkedIn.png">
+                <img src="/images/logos/LinkedIn.png" />
             </a>
         </div>
     </div>
 </div>
-
-
-           
