@@ -483,7 +483,8 @@ h2 + .header-anchor {
   justify-content: space-evenly;
 }
 
-.social img {
+.social img,
+.social svg {
   height: 32px;
 }
 
@@ -495,6 +496,8 @@ h2 + .header-anchor {
 
 .box .boxbody {
   padding-top: 15px;
+  max-height: 300px;
+  overflow: scroll;
 }
 
 .blogpost {
