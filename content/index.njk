@@ -52,17 +52,20 @@ numberOfLatestPostsToShow: 3
     </div>
     <div class="box">
         <div class="boxhead">
-            <h2>Most Recent Project</h2>
+            <h2>Most Recent Projects</h2>
         </div>
-        <div class="boxbody">
+        <div class="boxbody mostrecent">
             {# List every content page in the project #}
-            {% set mostRecentGame = collections.games | last %}
+            {% set mostRecentGames = collections.games | reverse | head(2) %}
+            {% for mostRecentGame in mostRecentGames %}
             {% set mostRecentGameImgLocation = mostRecentGame.inputPath | inputPathDir %}
-            <a href="{{ mostRecentGame.url }}">
-                <h3>{{ mostRecentGame.data.title }}</h3>
-                {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image,
-                mostRecentGame.data.title %}
-            </a>
+            <div class="mostrecent-item">
+                <a href="{{ mostRecentGame.url }}">
+                    <h3>{{ mostRecentGame.data.title }}</h3>
+                    {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image, mostRecentGame.data.title, ["200"] %}
+                </a>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

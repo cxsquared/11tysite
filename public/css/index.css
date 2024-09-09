@@ -520,3 +520,18 @@ h2 + .header-anchor {
 .blogpost h3 {
   margin: 3px;
 }
+
+.bloginfo h3.no-image {
+  margin-left: 0;
+}
+
+.bloginfo .no-image a {
+  padding-left: 0;
+}
+
+.boxbody.mostrecent {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+

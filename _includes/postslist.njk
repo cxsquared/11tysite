@@ -6,7 +6,11 @@
 	{% endif %}
 
 	<div class="bloginfo">
+		{% if post.data.image %}
 		<h3>
+		{% else %}
+		<h3 class="no-image">
+		{% endif %}
 			<a href="{{ post.url }}" class="postlist-link">
 				{% if post.data.title %}
 				{{ post.data.title }}
