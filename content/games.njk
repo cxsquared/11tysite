@@ -4,9 +4,13 @@ eleventyNavigation:
   key: Games 
   order: 2
 ---
-<div class="box" style="width: 100%;">
-  <h1>Games</h1>
+<div class="box full-height" style="width: 100%;">
+  <div class="boxhead">
+    <h1>Games</h1>
+  </div>
 
-  {% set postslist = collections.games %}
-  {% include "postslist.njk" %}
+  <div class="boxbody">
+    {% set postslist = collections.games %}
+    {% include "postslist.njk" %}
+  </div>
 </div>

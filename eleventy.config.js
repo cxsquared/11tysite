@@ -10,6 +10,8 @@ const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginBundle = require("@11ty/eleventy-plugin-bundle");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 
+const faviconsPlugin = require("eleventy-plugin-gen-favicons");
+
 const pluginDrafts = require("./eleventy.config.drafts.js");
 const pluginImages = require("./eleventy.config.images.js");
 
@@ -39,6 +41,8 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(pluginBundle);
+
+  eleventyConfig.addPlugin(faviconsPlugin, {});
 
   // Filters
   eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
@@ -88,11 +92,11 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter("inputPathDir", (inputPath) => {
-    let splitDirs = inputPath.split('/')
-    splitDirs.pop()
-    splitDirs.splice(0, 2)
-    return splitDirs.join('/') 
-  })
+    let splitDirs = inputPath.split("/");
+    splitDirs.pop();
+    splitDirs.splice(0, 2);
+    return splitDirs.join("/");
+  });
 
   eleventyConfig.addFilter("getRandom", function (items) {
     let selected = items[Math.floor(Math.random() * items.length)];
@@ -142,6 +146,35 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addShortcode("currentBuildDate", () => {
     return new Date().toISOString();
+  });
+
+  eleventyConfig.addShortcode("disqus", (id, title, url) => {
+    return `<script>
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+		var disqus_config = function () {
+			this.page.url = "${url}";  // Replace PAGE_URL with your page's canonical URL variable
+			this.page.title = "${title}";
+			this.page.identifier = "${id}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		(function () { // DON'T EDIT BELOW THIS LINE
+			var d = document, s = d.createElement('script');
+			s.src = 'https://codyclaborn.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+		})();
+	</script>`;
+  });
+
+  eleventyConfig.addShortcode("randomPage", (allPages, elementId) => {
+    const pageArray = allPages.map((p) => '"' + p.url + '"');
+    return `<script>
+      const anchor = document.getElementById("${elementId}");
+      const pages = [${pageArray.join(",")}];
+      const random = Math.floor(Math.random() * pages.length);
+      anchor.href = pages[random];
+    </script>`;
   });
 
   // Features to make your build faster (when you need them)

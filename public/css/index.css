@@ -214,7 +214,9 @@ a[href]:active {
 
 main {
   display: flex;
+  overflow: auto;
   align-items: flex-start;
+  padding-bottom: 66px;
 }
 
 main :first-child {
@@ -334,6 +336,8 @@ nav {
   max-width: 1000px;
   margin: 0 auto;
   padding: 25px;
+  padding-bottom: 0;
+  min-height: 100%;
 }
 
 .box {
@@ -500,6 +504,10 @@ h2 + .header-anchor {
   overflow: scroll;
 }
 
+.box.full-height .boxbody {
+  max-height: none;
+}
+
 .blogpost {
   display: flex;
   align-items: center;
@@ -534,4 +542,26 @@ h2 + .header-anchor {
   justify-content: space-evenly;
 }
 
+.splitcontainer {
+  display: flex;
+}
 
+footer .box {
+  padding: 0;
+  margin-bottom: -25px;
+  height: 78px;
+}
+
+footer p {
+  line-height: 1;
+  margin: 3px;
+  text-align: center;
+}
+
+footer {
+  width: 950px;
+  margin-top: -66px;
+  /* negative value of footer height */
+  height: 66px;
+  clear: both;
+}

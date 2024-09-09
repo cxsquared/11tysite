@@ -21,6 +21,18 @@ const now = [
     image: "https://static.tvtropes.org/pmwiki/pub/images/jetlag.png",
     verb: "watching",
   },
+  {
+    name: "Smile! :D - Porter Robinson",
+    verb: "listening",
+    image:
+      "https://upload.wikimedia.org/wikipedia/en/thumb/1/1b/Porter_Robinson_Smile%21_D_album_cover.jpg/220px-Porter_Robinson_Smile%21_D_album_cover.jpg",
+  },
+  {
+    name: "Let's Learn Everything",
+    verb: "listening",
+    image:
+      "https://maximumfun.org/wp-content/uploads/2022/08/Lets-Learn-Everything-v2-400x400.png",
+  },
 ];
 
 function preloadImages() {
@@ -50,7 +62,7 @@ function featuredNow() {
   nameContainer.textContent = featuredNow.name;
 }
 
-document.onread
+document.onread;
 preloadImages();
 featuredNow();
 setInterval(featuredNow, 10000);

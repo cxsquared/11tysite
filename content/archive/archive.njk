@@ -1,0 +1,29 @@
+---
+permalink: /archive/
+layout: layouts/home.njk
+---
+<div style="flex: 1;">
+	<div class="box">
+		<div class="boxhead">
+			< <h1>Archive</h1>
+		</div>
+		<div class="boxbody">
+			<p>A view into the more boring past...</p>
+			<h2>Updates</h2>
+			<ul>
+				{% for update in metadata.updates %}
+				<li>{{ update }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+	<div class="box full-height">
+		<div class="boxhead">
+			<h2>2023</h2>
+		</div>
+		<div class="boxbody">
+			{% image "2023_site.png", "My site in 2023", [800] %}
+		</div>
+	</div>
+</div>

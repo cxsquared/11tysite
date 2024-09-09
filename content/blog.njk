@@ -4,9 +4,14 @@ eleventyNavigation:
   key: Blog 
   order: 2
 ---
-<div class="box" style="width: 100%;">
-  <h1>Blog</h1>
+<div class="box full-height" style="width: 100%;">
+  <div class="boxhead">
+    <h1>Blog</h1>
+  </div>
 
-  {% set postslist = collections.posts %}
-  {% include "postslist.njk" %}
+  <div class="boxbody">
+    {% set postslist = collections.posts %}
+    {% include "postslist.njk" %}
+  </div>
 </div>
+

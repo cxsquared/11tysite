@@ -14,32 +14,42 @@ layout: layouts/base.njk
 		<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
 		{%- endfor %}
 	</ul>
-    
-    {% if game_link %}
-        <div id="game-container">
-            <iframe title="{{ title }}" width="100%" height="600px" style="border: none;" src="https://codyclaborn.me{{ game_link }}"></iframe>
-        </div>
-        <p id="mobile-warn" style="display: none;">
-            This game is not designed to work on mobile. If you still want to give it a shot go to 
-            <a href="https://codyclaborn.me{{ game_link }}">
-            https://codyclaborn.me{{ game_link }}
-            </a>
-            .
-        </p>
-        <hr style="color: 'grey'; background-color: 'grey'; height: '2px';" />
-        <script src="js/loadgame.js"></script>
-    {% endif %}
 
-    {{ content | safe }}
+	{% if game_link %}
+	<div id="game-container" style="margin-top: 7px;">
+		<iframe title="{{ title }}" width="100%" height="600px" style="border: none;"
+			src="https://codyclaborn.me{{ game_link }}"></iframe>
+	</div>
+	<p id="mobile-warn" style="display: none;">
+		This game is not designed to work on mobile. If you still want to give it a shot go to
+		<a href="https://codyclaborn.me{{ game_link }}">
+			https://codyclaborn.me{{ game_link }}
+		</a>
+		.
+	</p>
+	<div class="links-nextprev" />
+	<script src="js/loadgame.js"></script>
+	{% endif %}
 
-	{%- if collections.posts %}
-	{%- set previousPost = collections.posts | getPreviousCollectionItem %}
-	{%- set nextPost = collections.posts | getNextCollectionItem %}
+	{{ content | safe }}
+
+	{%- if collections.games %}
+	{%- set previousPost = collections.games | getPreviousCollectionItem %}
+	{%- set nextPost = collections.games | getNextCollectionItem %}
 	{%- if nextPost or previousPost %}
 	<ul class="links-nextprev">
-		{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{% endif %}
+		{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{%
+		endif %}
 		{%- if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
 	</ul>
 	{%- endif %}
 	{%- endif %}
+
+	{% if comments %}
+	<div id="disqus_thread"></div>
+	{% disqus page.fileSlug, title, metadata.url + page.url %}
+
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+			Disqus.</a></noscript>
+	{% endif %}
 </div>
