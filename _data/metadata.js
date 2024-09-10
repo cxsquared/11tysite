@@ -17,11 +17,11 @@ module.exports = {
     "9/3 - Starting moving to 11ty",
   ],
   todo: [
+    "links page",
     "Photo Gallery",
     "Better Sitemap",
     "More now doings...",
     "Fun gifs",
     "I'm feeling lucky button",
-    "Submit to webring",
   ],
 };

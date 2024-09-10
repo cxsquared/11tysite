@@ -9,9 +9,6 @@ tags:
   - transmission
 description: Relay was a game built for the 2018 Global Game Jam with the theme of Transmission 
 comments: true
-playable: true
-game_link: /games/relay/index.html
-game_type: unity 
 ---
 
 Relay is a third person adventure game built using Unity. Check out the game over at [GameJolt](https://gamejolt.com/games/relay_ggj2018/315386).
