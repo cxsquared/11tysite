@@ -11,7 +11,7 @@ tags:
 description: How I Remember It is a game built with Heaps for the 2023 20 Second Game Jam.
 comments: true
 playable: true
-game_link: /games/playable/how-i-remember-it/index.html
+game_link: /games/play/how-i-remember-it/index.html
 game_type: heaps
 ---
 
