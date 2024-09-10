@@ -11,7 +11,11 @@ module.exports = {
   disqus: {
     shortname: "codyclaborn",
   },
-  updates: ["9/9 - Almost done with the site", "9/3 - Starting moving to 11ty"],
+  updates: [
+    "9/10 - Added mobile support. Stop background moving when user has reduced animations. Added webmentions. Added a few more 88x31",
+    "9/9 - Almost done with the site",
+    "9/3 - Starting moving to 11ty",
+  ],
   todo: [
     "Photo Gallery",
     "Better Sitemap",

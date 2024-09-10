@@ -12,13 +12,18 @@
         <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet" type="text/css">
         <link
         rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}"> {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
-        <meta name="generator" content="{{ eleventy.generator }}"> {#-
-                                                		CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
-                                                		1. You can add to them using `{% css %}`
-                                                		2. You can get from them using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
-                                                		3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
-                                                		4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
-                                                		#}
+        <meta name="generator" content="{{ eleventy.generator }}">
+        <script src="/js/webmention.min.js" async></script> 
+        <link href="mailto:cxsquared@gmail.com" rel="me">
+        <link rel="webmention" href="https://webmention.io/codyclaborn.me/webmention" />
+        
+        {#-
+        CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
+        1. You can add to them using `{% css %}`
+        2. You can get from them using `{% getBundle "css" %}` or `{% getBundleFileUrl "css" %}`
+        3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
+        4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
+        #}
         {% favicons 'favicon.svg', appleIconBgColor='#FFF' %}
         {#- Add an arbitrary string to the bundle #}{%- css %}* { box-sizing: border-box; }
         {% endcss %}

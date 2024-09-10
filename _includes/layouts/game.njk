@@ -45,6 +45,8 @@ layout: layouts/base.njk
 	{%- endif %}
 	{%- endif %}
 
+	<div id="webmentions"></div>
+
 	{% if comments %}
 	<div id="disqus_thread"></div>
 	{% disqus page.fileSlug, title, metadata.url + page.url %}
