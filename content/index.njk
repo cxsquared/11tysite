@@ -25,12 +25,13 @@ numberOfLatestPostsToShow: 3
                     I'm great at coming up with awfully brilliant fan fiction ideas and
                     titles
                 </li>
-                <li>A few of my favorite things: Psychonauts, House Of Leaves, Fall Out Boy, What We Do in the Shadows</li>
+                <li>A few of my favorite things: Psychonauts, House Of Leaves, Fall Out Boy, What We Do in the Shadows
+                </li>
             </ul>
         </div>
     </div>
     <div class="splitcontainer">
-        <div class="box" style="width: 50%;">
+        <div class="box half">
             <div class="boxhead">
                 <h2>Most Recent Project</h2>
             </div>
@@ -47,7 +48,7 @@ numberOfLatestPostsToShow: 3
                 </div>
             </div>
         </div>
-        <div class="box" style="width: 50%;">
+        <div class="box half">
             {% set nowdoing = media.now | getRandom %}
             <div class="boxhead">
                 <h2 id="now-title">Now {{ nowdoing.verb }}<h2>
@@ -83,7 +84,7 @@ numberOfLatestPostsToShow: 3
         </div>
     </div>
     <div class="splitcontainer">
-        <div class="box" style="width: 50%;">
+        <div class="box half">
             <div class="boxhead">
                 <h2>TO:DO</h2>
             </div>
@@ -95,7 +96,7 @@ numberOfLatestPostsToShow: 3
                 </ul>
             </div>
         </div>
-        <div class="box" style="width: 50%;">
+        <div class="box half">
             <div class="boxhead">
                 <h2>UPDATES</h2>
             </div>
