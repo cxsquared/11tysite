@@ -546,6 +546,13 @@ h2 + .header-anchor {
 .boxbody.mostrecent {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  height: 220px;
+}
+
+.boxbody.mostrecent h4 {
+  text-wrap: wrap;
+  width: 100px;
 }
 
 .splitcontainer {
@@ -667,7 +674,7 @@ footer {
 #here {
   position: absolute;
   margin-top: 19px;
-  margin-left: -15.5rem;
+  margin-left: 13rem;
 }
 
 #cools {
