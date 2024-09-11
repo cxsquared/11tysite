@@ -761,6 +761,17 @@ footer {
   footer .box {
     height: 90px;
   }
+
+  #chalk,
+  #here, 
+  #cools, 
+  #markers, 
+  #hang,
+  #cat,
+  #heart {
+    display: none;
+  }
+
 }
 
 @media (prefers-reduced-motion) {
