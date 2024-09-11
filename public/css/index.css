@@ -678,6 +678,25 @@ footer {
   margin-left: .5rem;
 }
 
+#hang {
+  position: absolute;
+  margin-top: 256px;
+  margin-left: 12rem;
+}
+
+#cat {
+  position: absolute;
+  margin-top: 259px;
+  margin-left: -1rem;
+}
+
+#heart {
+  position: absolute;
+  margin-top: 217px;
+  margin-left: -0.25rem;
+  rotate: -24deg;
+}
+
 @media screen and (max-width: 550px) {
   #real-body {
     padding: 0;
