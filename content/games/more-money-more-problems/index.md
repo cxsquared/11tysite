@@ -10,6 +10,8 @@ tags:
   - haxeflixel
   - music
 game_link: /games/ld40/index.html
+game_height: 640x
+game_width: 640px 
 ---
 
 Take on one last job as you break into your final score. But don’t get too greedy or you might just get caught. Collect coins, crack safes, find the master vault, and escape with as much as you can.

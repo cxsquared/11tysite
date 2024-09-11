@@ -12,6 +12,8 @@ comments: true
 playable: true
 game_link: /games/spooky/index.html
 game_type: heaps
+game_height: 450x
+game_width: 100% 
 ---
 
 Spooky Signals is a game built with [Heaps](http://heaps.io) during the 2021 [Global Game Jam](https://globalgamejam.org/2021/games/spooky-signals-6). You can look at the source code of the game on my [Github](https://github.com/cxsquared/GG2021_SpookySignals).

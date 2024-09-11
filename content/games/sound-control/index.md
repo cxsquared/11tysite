@@ -10,6 +10,8 @@ tags:
   - haxeflixel
 comments: true
 game_link: /games/ld33/index.html
+game_height: 500px
+game_width: 640px 
 ---
 
 Sound Control is a game made using [HaxeFlixel](http://haxeflixel.com) in 48 hours for Ludum Dare 33. The theme was You Are the Monster. I hadn't planned on doing the jam but the theme was too good not to. You can check out my game either by click read more or on the [LudumDare site](http://ludumdare.com/compo/ludum-dare-33/?action=preview&uid=23711). You can also checkout the source code on my [Github](https://github.com/cxsquared/ld33-SoundControl).

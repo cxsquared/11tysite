@@ -8,7 +8,6 @@ tags:
   - unity
 description: Ancient Aliens is a top down twin stick shooter made for Global Game Jam in 2016
 comments: true
-playable: false
 game_type: unity
 ---
 

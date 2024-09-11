@@ -10,6 +10,8 @@ tags:
   - haxe
 comments: true
 game_link: /games/0hgame/index.html
+game_height: 640px
+game_width: 800px 
 ---
 
 Fireflies was a game built in 1 hour during the [0 Hour Game Jame](0hgame.eu). I just wanted to see what I could do in one hour and make a really quick prototype. The game is a simple avoidance game built with [Haxeflixel](http://haxeflixel.com/). You can play it by clicking read more or view the source over on my [Github](https://github.com/cxsquared/Firefly-0hgame)!

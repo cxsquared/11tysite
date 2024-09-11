@@ -13,6 +13,8 @@ comments: true
 playable: true
 game_link: /games/play/how-i-remember-it/index.html
 game_type: heaps
+game_height: 450x
+game_width: 100% 
 ---
 
 How I Remember It is a game built with [Heaps](http://heaps.io) during the November 2023 [20 Second Game Jam](https://itch.io/jam/20-second-game-jam-2023). You can look at the source code of the game on my [Github](https://github.com/cxsquared/20sgj2023).

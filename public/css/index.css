@@ -572,6 +572,11 @@ footer {
   clear: both;
 }
 
+#game-container {
+  display: flex;
+  justify-content: center;
+}
+
 .splitcontainer .box.half {
   width: 50%;
 }
@@ -675,7 +680,7 @@ footer {
 #markers {
   position: absolute;
   margin-top: 309px;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 #hang {
@@ -763,15 +768,14 @@ footer {
   }
 
   #chalk,
-  #here, 
-  #cools, 
-  #markers, 
+  #here,
+  #cools,
+  #markers,
   #hang,
   #cat,
   #heart {
     display: none;
   }
-
 }
 
 @media (prefers-reduced-motion) {
