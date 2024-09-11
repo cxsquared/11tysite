@@ -8,8 +8,8 @@ tags:
   - blueprints
 category: tutorial
 description: An Unreal 4 blueprint tutorial covering the creation of a dynamic dialogue system and text widgets.
-comments: true
 toc: true
+dsqId: 5429708874
 ---
 
 [[toc]]

@@ -1,58 +1,62 @@
 ---
 layout: layouts/base.njk
 ---
-<div class="post box">
-	{# Only include the syntax highlighter CSS on blog posts #}
-	{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
-	{%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
-	<h1>{{ title }}</h1>
+<div class="postbody" style="max-width: 100%;">
+	<div class="box post full-height">
+		{# Only include the syntax highlighter CSS on blog posts #}
+		{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
+		{%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
+		<div class="boxhead">
+			<h1>{{ title }}</h1>
+			<ul class="post-metadata">
+			<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
+			{%- for tag in tags | filterTagList %}
+			{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+			<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
+			{%- endfor %}
+			</ul>
+		</div>
+		
+		{% if game_link %}
+		<div id="game-container" style="margin-top: 7px;">
+			<iframe id="game" title="{{ title }}" style="border: none;" width="{{ game_width }}" height="{{ game_height }}"
+				src="{{ metadata.url }}{{ game_link }}"></iframe>
+		</div>
+		<p id="mobile-warn" style="display: none;">
+			This game is not designed to work on mobile. If you still want to give it a shot go to
+			<a href="{{ metadata.url }}{{ game_link }}">
+				{{ metadata.url }}{{ game_link }}
+			</a>
+			.
+		</p>
+		{% endif %}
 
-	<ul class="post-metadata">
-		<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
-		{%- for tag in tags | filterTagList %}
-		{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-		<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
-		{%- endfor %}
-	</ul>
+		<div class="boxbody">
+			{{ content | safe }}
 
-	{% if game_link %}
-	<div id="game-container" style="margin-top: 7px;">
-		<iframe id="game" title="{{ title }}" style="border: none;" width="{{ game_width }}" height="{{ game_height }}"
-			src="https://codyclaborn.me{{ game_link }}"></iframe>
+			{%- if collections.games %}
+			{%- set previousPost = collections.games | getPreviousCollectionItem %}
+			{%- set nextPost = collections.games | getNextCollectionItem %}
+			{%- if nextPost or previousPost %}
+			<ul class="links-nextprev">
+				{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{% endif %}
+				{%- if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
+			</ul>
+			{%- endif %}
+			{%- endif %}
+		</div>
 	</div>
-	<p id="mobile-warn" style="display: none;">
-		This game is not designed to work on mobile. If you still want to give it a shot go to
-		<a href="https://codyclaborn.me{{ game_link }}">
-			https://codyclaborn.me{{ game_link }}
-		</a>
-		.
-	</p>
-	<div class="links-nextprev" />
-	{% endif %}
-
-	{{ content | safe }}
-
-	{%- if collections.games %}
-	{%- set previousPost = collections.games | getPreviousCollectionItem %}
-	{%- set nextPost = collections.games | getNextCollectionItem %}
-	{%- if nextPost or previousPost %}
-	<ul class="links-nextprev">
-		{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{%
-		endif %}
-		{%- if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
-	</ul>
-	{%- endif %}
-	{%- endif %}
-
-	<div id="webmentions"></div>
-
-	{% if comments %}
-	<div id="disqus_thread"></div>
-	{% disqus page.fileSlug, title, metadata.url + page.url %}
-
-	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-			Disqus.</a></noscript>
-	{% endif %}
+	<div class="box full-height">
+		<div class="boxhead">
+			<h2>WebMentions</h2>
+		</div>
+		<div class="boxbody">
+			<p>
+			You can respond to <a href="{{ url }}">this</a> by: favoriting, boosting, or replying to a <a href="https://mastodon.gamedev.place/home">toot</a> that mentions it; or sending a webmention from your own site to the <a href="{{ url }}">current url</a>
+			</p>
+			<div id="webmentions"></div>
+		</div>
+	</div>
 </div>
 
 <script src="/js/loadgame.js"></script>

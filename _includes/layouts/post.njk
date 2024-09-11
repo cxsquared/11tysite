@@ -1,41 +1,94 @@
 ---
 layout: layouts/base.njk
 ---
-<div class="post box">
-	{# Only include the syntax highlighter CSS on blog posts #}
-	{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
-	{%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
-	<h1>{{ title }}</h1>
+<div class="postbody" style="max-width: 100%;">
+	<div class="post box full-height">
+		{# Only include the syntax highlighter CSS on blog posts #}
+		{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
+		{%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
+		<h1>{{ title }}</h1>
 
-	<ul class="post-metadata">
-		<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
-		{%- for tag in tags | filterTagList %}
-		{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-		<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
-		{%- endfor %}
-	</ul>
+		<ul class="post-metadata">
+			<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
+			{%- for tag in tags | filterTagList %}
+			{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+			<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>
+			{%- endfor %}
+		</ul>
 
-	{{ content | safe }}
+		{{ content | safe }}
 
-	{%- if collections.posts %}
-	{%- set previousPost = collections.posts | getPreviousCollectionItem %}
-	{%- set nextPost = collections.posts | getNextCollectionItem %}
-	{%- if nextPost or previousPost %}
-	<ul class="links-nextprev">
-		{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{%
-		endif %}
-		{%- if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
-	</ul>
-	{%- endif %}
-	{%- endif %}
+		{%- if collections.posts %}
+		{%- set previousPost = collections.posts | getPreviousCollectionItem %}
+		{%- set nextPost = collections.posts | getNextCollectionItem %}
+		{%- if nextPost or previousPost %}
+		<ul class="links-nextprev">
+			{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{%
+			endif %}
+			{%- if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
+		</ul>
+		{%- endif %}
+		{%- endif %}
 
-	<div id="webmentions"></div>
-
-	{% if comments %}
-	<div id="disqus_thread"></div>
-	{% disqus page.fileSlug, title, metadata.url + page.url %}
-
-	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-			Disqus.</a></noscript>
+		{%- if collections.tutorials %}
+		{%- set previousPost = collections.tutorials | getPreviousCollectionItem %}
+		{%- set nextPost = collections.tutorials | getNextCollectionItem %}
+		{%- if nextPost or previousPost %}
+		<ul class="links-nextprev">
+			{%- if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.title }}</a></li>{%
+			endif %}
+			{%- if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.title }}</a></li>{% endif %}
+		</ul>
+		{%- endif %}
+		{%- endif %}
+	</div>
+	<div class="box full-height">
+		<div class="boxhead">
+			<h2>WebMentions</h2>
+		</div>
+		<div class="boxbody">
+			<p>
+			You can respond to <a href="{{ url }}">this</a> by: favoriting, boosting, or replying to a <a href="https://mastodon.gamedev.place/home">toot</a> that mentions it; or sending a webmention from your own site to the <a href="{{ url }}">current url</a>
+			</p>
+			<div id="webmentions"></div>
+		</div>
+	</div>
+	{% if dsqId %}
+	<div class="post box full-height">
+		<div class="boxhead">
+			<h2>Legacy Comments</h2>
+		</div>
+		<div class="comments boxbody">
+			<ul>
+			{% set threads = comments | legacyComments(dsqId) | reverse %}
+			{% for thread in threads %}
+				<li>
+					<div class="comment">
+						<div class="inner">
+							<p>
+								<span class="author">{{ thread.author.username }}</span> • <time>{{ thread.createdAt | readableDate}}</time>
+							</p>
+							{{ thread.message | safe }}
+						</div>
+					</div>
+					{% if thread.children %}
+					<ul>
+						{% for child in thread.children %}
+						<div class="comment">
+							<div class="inner">
+								<p>
+									<span class="author">{{ child.author.username }}</span> • <time>{{ child.createdAt | readableDate}}</time>
+								</p>
+								{{ child.message | safe }}
+							</div>
+						</div>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
 	{% endif %}
 </div>

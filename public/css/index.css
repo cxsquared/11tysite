@@ -374,11 +374,6 @@ nav {
   color: pink;
 }
 
-/* Post */
-.post {
-  background-color: var(--background-color);
-}
-
 /* Posts list */
 .postlist {
   list-style: none;
@@ -661,6 +656,35 @@ footer {
 #webmentions .comments li .text {
   font-style: italic;
   text-decoration: none;
+}
+
+.comment {
+  display: flex;
+  padding: 0 25px;
+  border-bottom: 1px dashed var(--color-gray-20);
+}
+
+.comments ul {
+  list-style: none;
+}
+
+.comments ul ul {
+  padding-left: 50px;
+  clear: both;
+}
+
+.comment p {
+  margin: 0 0 15px 0;
+}
+
+.comment .author {
+  font-weight: 700;
+  color: var(--h3-color);
+}
+
+.comment time {
+  font-size: 90%;
+  color: var(--color-gray-50);
 }
 
 /* fun stuff */

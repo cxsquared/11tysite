@@ -9,8 +9,8 @@ tags:
   - visual studio
 category: tutorial
 description: Setting up the XCode and Visual Studio programming environment for developing an audio engine for the Fmod API in C++.
-comments: true
 toc: true
+dsqId: 5444782751
 ---
 
 [[toc]]
