@@ -651,6 +651,33 @@ footer {
   text-decoration: none;
 }
 
+/* fun stuff */
+
+#chalk {
+  position: absolute;
+  padding-top: 9px;
+  margin-left: 28rem;
+}
+
+#here {
+  position: absolute;
+  margin-top: 19px;
+  margin-left: -15.5rem;
+}
+
+#cools {
+  position: absolute;
+  margin-top: 244px;
+  margin-left: 34rem;
+  rotate: 7deg;
+}
+
+#markers {
+  position: absolute;
+  margin-top: 309px;
+  margin-left: .5rem;
+}
+
 @media screen and (max-width: 550px) {
   #real-body {
     padding: 0;

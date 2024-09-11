@@ -24,9 +24,6 @@
         3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
         4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
         #}
-        {% if true %}
-        {% favicons 'favicon.svg', appleIconBgColor='#FFF' %}
-        {% endif %}
         {#- Add an arbitrary string to the bundle #}{%- css %}* { box-sizing: border-box; }
         {% endcss %}
         {#- Add the contents of a file to the bundle #}
@@ -42,10 +39,13 @@
         {% include "node_modules/prismjs/themes/prism-funky.css" %}
         {% endcss %}
         {#- Render the CSS bundle using Inlined CSS (for the fastest site performance in production) #}
-            <style>
-        {% getBundle "css" %}</style>
+        <style>
+        {% getBundle "css" %}
+        </style>
         {#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
         {#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
+
+        {% favicons 'favicon.svg', appleIconBgColor='#FFF' %}
     </head>
     <body>
         <div id="real-body">
