@@ -45,12 +45,6 @@
   }
 }
 
-@media screen and (max-width: 550px) {
-  #real-body {
-    width: 95vw;
-  }
-}
-
 .saturate {
   filter: saturate(3);
 }
@@ -340,6 +334,7 @@ nav {
 /* Body */
 #real-body {
   max-width: 1000px;
+  min-width: 1000px;
   margin: 0 auto;
   padding: 25px;
   padding-bottom: 0;
@@ -774,6 +769,7 @@ a.rainbow_text_animated {
   #real-body {
     padding: 0;
     width: 100vw;
+    min-width: 0;
   }
 
   #header-image h1 {
