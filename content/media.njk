@@ -1,0 +1,17 @@
+---
+permalink: "data/media.json"
+---
+
+{
+    "now": [
+        {%- for media in media.now %}
+            {
+                "name": "{{ media.name | safe }}",
+                "image": "{{ media.image | safe }}",
+                "verb": "{{ media.verb }}",
+                "url": "{{ media.url | safe }}"
+            }
+        {%- if not loop.last -%},{%- endif -%}
+        {%- endfor %}
+    ]
+}
