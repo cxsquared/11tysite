@@ -12,6 +12,7 @@ module.exports = {
     shortname: "codyclaborn",
   },
   updates: [
+    "1/20 - New games.", 
     "9/11 - Cleaned up playable games on the site. Guest book link. And removed Disqus.",
     "9/10 - Added mobile support. Stop background moving when user has reduced animations. Added webmentions. Added a few more 88x31",
     "9/9 - Almost done with the site",

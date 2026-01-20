@@ -14,6 +14,8 @@ var getJSON = function(url, callback) {
 };
 
 let now = null 
+let favorites = null
+let favoritesSet = false;
 
 function preloadImages() {
   for (var i = 0; i < now.length; i++) {
@@ -53,14 +55,42 @@ function featuredNow() {
           return;
 
         now = data.now;
+        favorites = data.favorites;
         preloadImages();
         setNow();
+        setFavorites();
       }
     )
     return;
   } 
 
   setNow();
+  setFavorites();
+}
+
+const maxFavorites = 5;
+const maxIter = 10;
+function setFavorites() {
+  if (favoritesSet)
+    return;
+
+  var favoriteData = [];
+  var usedIndexes = [];
+  var currentIter = 0;
+
+  while(favoriteData.length < maxFavorites && currentIter <= maxIter) {
+    const index = Math.floor(Math.random() * favorites.length);
+    if (usedIndexes.indexOf(index) < 0) {
+      favoriteData.push(favorites[index]);
+      usedIndexes.push(index);
+    }
+
+    currentIter++;
+  }
+
+  var favorite_li = document.getElementById("favorites");
+  favorite_li.textContent = "A few of my favorite things: " + favoriteData.join(", ");
+  favoritesSet = true;
 }
 
 featuredNow();

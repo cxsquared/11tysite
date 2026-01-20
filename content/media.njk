@@ -13,5 +13,11 @@ permalink: "data/media.json"
             }
         {%- if not loop.last -%},{%- endif -%}
         {%- endfor %}
+    ],
+    "favorites": [
+        {%- for thing in media.favorites %}
+            "{{ thing | safe }}"
+        {%- if not loop.last -%},{%- endif -%}
+        {%- endfor %}
     ]
 }

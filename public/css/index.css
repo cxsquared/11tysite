@@ -515,6 +515,8 @@ h2 + .header-anchor {
   height: 100px;
   border-radius: 3px;
   margin-right: 10px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .blogpost .bloginfo {
@@ -538,6 +540,14 @@ h2 + .header-anchor {
   justify-content: space-evenly;
   flex-wrap: wrap;
   height: 220px;
+}
+
+div.mostrecent-item {
+  display: flex;
+}
+
+div.mostrecent-item > a {
+  align-self: center;
 }
 
 .boxbody.mostrecent h4 {
