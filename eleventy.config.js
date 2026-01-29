@@ -177,6 +177,10 @@ module.exports = function (eleventyConfig) {
     </script>`;
   });
 
+  eleventyConfig.addCollection("luckyPages", async (collectionsApi) => {
+    return  collectionsApi.getAll();
+    });
+
   // Features to make your build faster (when you need them)
 
   // If your passthrough copy gets heavy and cumbersome, add this line

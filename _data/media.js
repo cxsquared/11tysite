@@ -1,12 +1,6 @@
 module.exports = {
   now: [
-    {
-      name: "Old School Runescape",
-      image: "https://www.runescape.com/img/rsp777/social-share.jpg?1",
-      verb: "playing",
-      url: "https://oldschool.runescape.com/"
-    },
-    {
+   {
       name: "iRacing",
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1rSzjE7Kh77GBP92rqYy51vziv5DP8wI5-Q&s",

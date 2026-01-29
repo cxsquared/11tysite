@@ -24,6 +24,5 @@ module.exports = {
     "Better Sitemap",
     "More now doings...",
     "Fun gifs",
-    "I'm feeling lucky button",
   ],
 };

@@ -164,6 +164,11 @@ numberOfLatestPostsToShow: 3
     </div>
     <div class="box">
         <div class="boxhead">
+            <h2 class=""><a class="rainbow_text_animated" id="luck">I'm Feeling Lucky!</a></h2>
+        </div>
+    </div>
+    <div class="box">
+        <div class="boxhead">
             <h2>Link Me</h2>
         </div>
         <div class="boxbody" style="display: flex; justify-content: space-evenly;">
@@ -230,3 +235,18 @@ numberOfLatestPostsToShow: 3
 
 <script src="js/nowplaying.js"></script>
 <script src="js/mastodon.js"></script>
+
+<script id="all-pages" type="application/json">
+    [
+      {% for page in collections.luckyPages %}"{{ page.url }}"{% if not loop.last %},{% endif %}{% endfor %}
+    ]
+</script>
+
+<script>
+    window.onload = (event) => {
+        const pages = JSON.parse(document.querySelector("#all-pages").textContent);
+        const random = pages[Math.floor(Math.random() * pages.length)];
+
+        document.getElementById('luck').href = `${window.location.origin}${random}`;
+    };
+</script>
