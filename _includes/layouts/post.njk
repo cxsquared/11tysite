@@ -4,9 +4,8 @@ layout: layouts/base.njk
 <div class="postbody" style="max-width: 100%;">
 	<div class="post box full-height">
 		{# Only include the syntax highlighter CSS on blog posts #}
-		{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
-		{%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
-		<h1>{{ title }}</h1>
+		<style> {% include "node_modules/prismjs/themes/prism-okaidia.css" %} </style>
+		<style> {% include "public/css/prism-diff.css" %} </style>
 
 		<ul class="post-metadata">
 			<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>

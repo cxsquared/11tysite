@@ -1,14 +1,14 @@
-const path = require("path");
-const eleventyImage = require("@11ty/eleventy-img");
+import path from "path";
+import eleventyImage from "@11ty/eleventy-img";
 
-function relativeToInputPath(inputPath, relativeFilePath) {
+export function relativeToInputPath(inputPath, relativeFilePath) {
   let split = inputPath.split("/");
   split.pop();
 
   return path.resolve(split.join(path.sep), relativeFilePath);
 }
 
-function isFullUrl(url) {
+export function isFullUrl(url) {
   try {
     new URL(url);
     return true;
@@ -17,7 +17,7 @@ function isFullUrl(url) {
   }
 }
 
-module.exports = function (eleventyConfig) {
+export default function (eleventyConfig) {
   // Eleventy Image shortcode
   // https://www.11ty.dev/docs/plugins/image/
   eleventyConfig.addAsyncShortcode(
@@ -26,7 +26,7 @@ module.exports = function (eleventyConfig) {
       src,
       alt,
       widths = [300, 600],
-      sizes = "100vh"
+      sizes = "100vh",
     ) {
       // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
       // Warning: Avif can be resource-intensive so take care!
@@ -60,6 +60,6 @@ module.exports = function (eleventyConfig) {
       };
 
       return eleventyImage.generateHTML(metadata, imageAttributes);
-    }
+    },
   );
-};
+}

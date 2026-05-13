@@ -6,14 +6,20 @@
         <meta name="robots" content="noarchive">
         <title>{{ title or metadata.title }}</title>
         <meta
-        name="description" content="{{ description or metadata.description }}"> {#- Atom and JSON feeds included by default #}
+        name="description" content="{{ description or metadata.description }}">
+        
+        {#- Atom and JSON feeds included by default #}
         <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
         <link href="https://i.imgur.com/gJroawV.png" rel="icon" type="image/x-icon">
  
         <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet" type="text/css">
         <link
-        rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}"> {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
+        rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}">
+        
+        {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
         <meta name="generator" content="{{ eleventy.generator }}">
+
+        {#- Webmentions #}
         <script src="/js/webmention.min.js" async></script> 
         <link href="mailto:cxsquared@gmail.com" rel="me">
         <link rel="webmention" href="https://webmention.io/codyclaborn.me/webmention" />
@@ -25,20 +31,16 @@
         3. You can do the same for JS: {% js %}{% endjs %} and <script>{% getBundle "js" %}</script>
         4. Learn more: https://github.com/11ty/eleventy-plugin-bundle
         #}
-        {#- Add an arbitrary string to the bundle #}{%- css %}* { box-sizing: border-box; }
-        {% endcss %}
+
+        {#- Add an arbitrary string to the bundle #}
+        <style> { box-sizing: border-box; } </style>
+
         {#- Add the contents of a file to the bundle #}
-        {%- css %}
-        {% include "public/css/index.css" %}
-        {% endcss %}
-        {%- css %}
-        {% include "public/css/fonts.css" %}
-        {% endcss %}
+        <style>{% include "public/css/index.css" %}</style>
+        <style>{% include "public/css/fonts.css" %}</style>
 
         {#- Or add from node_modules #}
-        {%- css %}
-        {% include "node_modules/prismjs/themes/prism-funky.css" %}
-        {% endcss %}
+        {# <style> {% include "node_modules/prismjs/themes/prism-funky.css" %} </style #}
         {#- Render the CSS bundle using Inlined CSS (for the fastest site performance in production) #}
         <style>
         {% getBundle "css" %}
@@ -46,7 +48,7 @@
         {#- Renders the CSS bundle using a separate file, if you can't set CSP directive style-src: 'unsafe-inline' #}
         {#- <link rel="stylesheet" href="{% getBundleFileUrl "css" %}"> #}
 
-        {#{% favicons 'favicon.svg', appleIconBgColor='#FFF' %}#}
+        {#-{% favicons 'favicon.svg', appleIconBgColor='#FFF' %}#}
     </head>
     <body>
         <div id="real-body">
@@ -59,19 +61,21 @@
                 </div>
                 <!--<a href="/" class="home-link">{{ metadata.title }}</a>-->
                 {#- Read more about `eleventy-navigation` at https://www.11ty.dev/docs/plugins/navigation/ #}
-                <nav>
-                    <h2 class="visually-hidden">Top level navigation menu</h2>
-                    <ul class="nav">
-                        {%- for entry in collections.all | eleventyNavigation %}
+                {% if page.url | htmlBaseUrl != "/" %}
+                    <nav>
+                        <h2 class="visually-hidden">Top level navigation menu</h2>
+                        <ul class="nav">
+                            {%- for entry in collections.all | eleventyNavigation %}
+                                <li class="nav-item">
+                                    <h3><a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.title }}</a></h3>
+                                </li>
+                            {%- endfor %}
                             <li class="nav-item">
-                                <h3><a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.title }}</a></h3>
+                                <h3><a href="/music">Music</a></h3>
                             </li>
-                        {%- endfor %}
-                        <li class="nav-item">
-                            <h3><a href="/music">Music</a></h3>
-                        </li>
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
+                {% endif %}
             </header>
             <main id="skip">
                 {{ content | safe }}
@@ -82,7 +86,7 @@
                         <span>CODYCLABORN.ME V0.999...</span>
                     </p>
                     <p>
-                        <a href="/sitemap.xml"><span>SITEMAP</span></a> | <a href="/archive/"><span>ARCHIVE</span></a> | <a href="mailto:cxsquared@gmail.com"><span>CONTACT</span></a> | <span>POWERED BY <a href="11ty.dev">11ty.dev</a></span>
+                        <a href="/feed.xml"><span>FEED</span></a> | <a href="/sitemap.xml"><span>SITEMAP</span></a> | <a href="/archive/"><span>ARCHIVE</span></a> | <a href="mailto:cxsquared@gmail.com"><span>CONTACT</span></a> | <span>POWERED BY <a href="11ty.dev">11ty.dev</a></span>
                     </p>
                 </div>
            </footer>

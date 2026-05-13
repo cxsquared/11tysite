@@ -1,22 +1,20 @@
-var path = require("path");
-const { DateTime } = require("luxon");
-const markdownIt = require("markdown-it");
-const markdownItEleventyImg = require("markdown-it-eleventy-img");
-const markdownItAnchor = require("markdown-it-anchor");
-const { tocPlugin } = require("@mdit-vue/plugin-toc");
+import path from "path";
+import { DateTime } from "luxon";
+import markdownIt from "markdown-it";
+import markdownItAnchor from "markdown-it-anchor";
+import markdownItEleventyImg from "markdown-it-eleventy-img";
+import { tocPlugin } from "@mdit-vue/plugin-toc";
+import pluginRss from "@11ty/eleventy-plugin-rss";
+import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import pluginBundle from "@11ty/eleventy-plugin-bundle";
+import pluginNavigation from "@11ty/eleventy-navigation";
+import faviconsPlugin from "eleventy-plugin-gen-favicons";
+import pluginDrafts from "./eleventy.config.drafts.js";
+import pluginImages from "./eleventy.config.images.js";
+import metadata from "./_data/metadata.js";
+import { RenderPlugin } from "@11ty/eleventy";
 
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginBundle = require("@11ty/eleventy-plugin-bundle");
-const pluginNavigation = require("@11ty/eleventy-navigation");
-
-const faviconsPlugin = require("eleventy-plugin-gen-favicons");
-
-const pluginDrafts = require("./eleventy.config.drafts.js");
-const pluginImages = require("./eleventy.config.images.js");
-
-/** @param {import('@11ty/eleventy').UserConfig} eleventyConfig */
-module.exports = function (eleventyConfig) {
+export default async function (eleventyConfig) {
   // Copy the contents of the `public` folder to the output folder
   // For example, `./public/css/` ends up in `_site/css/`
   eleventyConfig.addPassthroughCopy({
@@ -36,29 +34,33 @@ module.exports = function (eleventyConfig) {
 
   // Official plugins
   eleventyConfig.addPlugin(pluginRss);
+
   eleventyConfig.addPlugin(pluginSyntaxHighlight, {
     preAttributes: { tabindex: 0 },
   });
   eleventyConfig.addPlugin(pluginNavigation);
   eleventyConfig.addPlugin(pluginBundle);
 
+  eleventyConfig.addPlugin(RenderPlugin);
   eleventyConfig.addPlugin(faviconsPlugin, {});
 
   // Filters
   eleventyConfig.addFilter("readableDate", (dateObj, format, zone) => {
-    let date = dateObj
+    let date = dateObj;
     if (typeof dateObj === "string") {
-      date = new Date(dateObj)
+      date = new Date(dateObj);
     }
 
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     return DateTime.fromJSDate(date, { zone: zone || "utc" }).toFormat(
-      format || "dd LLLL yyyy"
+      format || "dd LLLL yyyy",
     );
   });
 
   eleventyConfig.addFilter("legacyComments", (comments, postId) => {
-    const threadComments = comments.filter(c => c.thread["_dsq:id"] == postId) 
+    const threadComments = comments.filter(
+      (c) => c.thread["_dsq:id"] == postId,
+    );
 
     return threadComments;
   });
@@ -98,7 +100,7 @@ module.exports = function (eleventyConfig) {
     return (tags || []).filter(
       (tag) =>
         ["all", "nav", "post", "posts", "games", "tutorials"].indexOf(tag) ===
-        -1
+        -1,
     );
   });
 
@@ -117,8 +119,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("unique", (arr = []) => [...new Set(arr)]);
 
   eleventyConfig.addFilter("jsonString", (json) => {
-    return JSON.stringify(json)
-  })
+    return JSON.stringify(json);
+  });
 
   eleventyConfig.setLibrary(
     "md",
@@ -126,7 +128,12 @@ module.exports = function (eleventyConfig) {
       html: true,
       breaks: true,
       linkify: true,
-    })
+    }),
+  );
+
+  // Customize Markdown library settings:
+  eleventyConfig.amendLibrary("md", (mdLib) => {
+    mdLib
       .use(markdownItEleventyImg, {
         imgOptions: {
           widths: [600, 300],
@@ -147,20 +154,16 @@ module.exports = function (eleventyConfig) {
           path.join(path.dirname(env.page.inputPath), filepath),
       })
       .use(tocPlugin, {})
-  );
-
-  // Customize Markdown library settings:
-  eleventyConfig.amendLibrary("md", (mdLib) => {
-    mdLib.use(markdownItAnchor, {
-      permalink: markdownItAnchor.permalink.ariaHidden({
-        placement: "after",
-        class: "header-anchor",
-        symbol: "#",
-        ariaHidden: false,
-      }),
-      level: [1, 2, 3, 4],
-      slugify: eleventyConfig.getFilter("slugify"),
-    });
+      .use(markdownItAnchor, {
+        permalink: markdownItAnchor.permalink.ariaHidden({
+          placement: "after",
+          class: "header-anchor",
+          symbol: "#",
+          ariaHidden: false,
+        }),
+        level: [1, 2, 3, 4],
+        slugify: eleventyConfig.getFilter("slugify"),
+      });
   });
 
   eleventyConfig.addShortcode("currentBuildDate", () => {
@@ -178,8 +181,8 @@ module.exports = function (eleventyConfig) {
   });
 
   eleventyConfig.addCollection("luckyPages", async (collectionsApi) => {
-    return  collectionsApi.getAll();
-    });
+    return collectionsApi.getAll();
+  });
 
   // Features to make your build faster (when you need them)
 
@@ -220,4 +223,4 @@ module.exports = function (eleventyConfig) {
     // folder name and does **not** affect where things go in the output folder.
     pathPrefix: "/",
   };
-};
+}
