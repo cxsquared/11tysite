@@ -13,6 +13,7 @@ export default {
     shortname: "codyclaborn",
   },
   updates: [
+    "5/13 - Changing up sidebar and new post",
     "1/20 - New games.",
     "9/11 - Cleaned up playable games on the site. Guest book link. And removed Disqus.",
     "9/10 - Added mobile support. Stop background moving when user has reduced animations. Added webmentions. Added a few more 88x31",
