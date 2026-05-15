@@ -12,9 +12,7 @@ import pluginNavigation from "@11ty/eleventy-navigation";
 import faviconsPlugin from "eleventy-plugin-gen-favicons";
 import pluginDrafts from "./eleventy.config.drafts.js";
 import pluginImages from "./eleventy.config.images.js";
-import metadata from "./_data/metadata.js";
 import { RenderPlugin } from "@11ty/eleventy";
-import * as cheerio from "cheerio";
 
 export default async function (eleventyConfig) {
   // Copy the contents of the `public` folder to the output folder

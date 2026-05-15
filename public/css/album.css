@@ -10,3 +10,26 @@
   border-image-slice: 10;
   background-image: url(/images/album_board_bg.png);
 }
+
+.photo {
+  max-height: 200px;
+} 
+
+.column > .row {
+  margin: auto
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  width: 301px;
+  padding: 16px 16px;
+}
+
+.column-low {
+  margin-top: 64px;
+}
+
+#photos {
+  display: flex;
+}

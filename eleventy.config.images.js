@@ -10,24 +10,26 @@ async function generateImages(eleventyConfig) {
     widths: [THUMB, FULL],
     formats: ["png"],
     outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
-    filenameFormat: function (id, src, width, format, options) {
+    filenameFormat: function (_id, src, width, format, _options) {
       let origFilename = src.split("/").pop();
       //strip off the file type, this could probably be one line of fancier JS
       let parts = origFilename.split(".");
       parts.pop();
       origFilename = parts.join(".");
 
-      if (width === THUMB) return `thumb-${origFilename}.${format}`;
-      else return `${origFilename}.${format}`;
+      if (width === THUMB) return `album/thumb-${origFilename}.${format}`;
+      else return `album/${origFilename}.${format}`;
     },
   };
 
   let files = await glob("./rawphotos/*.{jpg,jpeg,png,gif}");
   for (const f of files) {
     console.log("doing f", f);
-    let md = await Image(f, options);
+    const md = await Image(f, options);
+    console.log(JSON.stringify(md))
   }
 }
+
 export function relativeToInputPath(inputPath, relativeFilePath) {
   let split = inputPath.split("/");
   split.pop();
