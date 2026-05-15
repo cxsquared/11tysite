@@ -1,0 +1,22 @@
+---json
+{
+  "permalink": "/photos/data.json"
+}
+---
+{
+ "photos": [
+    {%- for photo in collections.albumPhotos %}
+    {
+      "full_url": "{{ photo.full_url }}",
+      "thumb_url": "{{ photo.thumb_url }}",
+      "camera": "{{ photo.camera }}",
+      "vertical": {{ photo.vertical }},
+      "date": "{{ photo.date }}",
+      "iso": "{{ photo.iso }}",
+      "shutterSpeed": "{{ photo.shutterSpeed }}",
+      "aperture": "{{ photo.aperture }}",
+      "description": "{{ photo.description }}"
+    } {% if not loop.last %},{% endif %}
+    {%- endfor %}
+  ]
+}

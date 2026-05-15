@@ -1,10 +1,14 @@
+:root {
+  --scale: 2
+}
+
 #album-page {
   margin: auto;
 }
 
 #album-page > .bi {
-  height: 500px;
-  width: 904px;
+  /* height: 500px; */
+  /* width: 904px; */
   border: 10px solid black;
   border-image-source: url(/images/album_board.png);
   border-image-slice: 10;
@@ -13,7 +17,16 @@
 
 .photo {
   max-height: 200px;
+  border: 8px solid white;
+  border-image-source: url(/images/pol_bg.png);
+  border-image-slice: 8;
+  border-bottom: 32px solid white;
 } 
+
+.photo.vertical {
+  border-right: 32px solid white;
+  border-bottom: 8px solid white;
+}
 
 .column > .row {
   margin: auto

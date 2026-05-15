@@ -1,11 +1,24 @@
-import path from "path";
-import { glob } from "glob";
 import Image, { generateHTML } from "@11ty/eleventy-img";
+import console from "console";
+import { glob } from "glob";
+import path from "path";
+import exifr from 'exifr'
+import { DateTime } from "luxon";
 
 const THUMB = 250;
 const FULL = 650;
 
+// {
+//     id: int,
+//     camera: string,
+//     
+//     date: Date.now(),
+//     description: "this is a test",
+//     vertical: true
+// }
+
 async function generateImages(eleventyConfig) {
+  const processedPhotos = [] 
   let options = {
     widths: [THUMB, FULL],
     formats: ["png"],
@@ -23,11 +36,32 @@ async function generateImages(eleventyConfig) {
   };
 
   let files = await glob("./rawphotos/*.{jpg,jpeg,png,gif}");
+  console.log("processing photo album");
   for (const f of files) {
-    console.log("doing f", f);
+    // Save image
     const md = await Image(f, options);
-    console.log(JSON.stringify(md))
+
+    const exifData = await exifr.parse(f)
+    const isVertical = md.png[0].width < md.png[0].height
+    const data = {
+      full_url: md.png[1].url,
+      thumb_url: md.png[0].url,
+      camera: exifData.Model,
+      vertical: isVertical,
+      date: DateTime.fromISO(exifData.CreateDate).toUnixInteger(),
+      iso: exifData.ISO,
+      shutterSpeed: exifData.ShutterSpeedValue,
+      aperture: exifData.ApertureValue,
+      description: "",
+    }
+
+    processedPhotos.push(data)
   }
+  console.log(`processed ${processedPhotos.length} photos`);
+
+	await eleventyConfig.addCollection("albumPhotos", async (_collectionsApi) => {
+		return processedPhotos;
+	});
 }
 
 export function relativeToInputPath(inputPath, relativeFilePath) {

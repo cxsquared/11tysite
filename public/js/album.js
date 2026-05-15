@@ -1,14 +1,12 @@
 (async () => {
   const columns = document.getElementsByClassName("column")
 
-  const tempPhotos = []
-  for(let i = 0; i < 6; i++) {
-    tempPhotos.push({
-      id: i + 1,
-      date: Date.UTC(new Date()),
-      description: "this is a tes",
-    })
-  }
+  const photoDataResponse = await fetch("/photos/data.json")
+
+  if (!photoDataResponse.ok)
+    return
+
+  const photoData = await photoDataResponse.json()
 
   const maxColumn = columns.length
   const maxRows = 2
@@ -38,9 +36,11 @@
       return
     }
 
+    const className = photo.vertical ? "photo vertical" : "photo";
+
     row.innerHTML =
       /*html*/
-      `<img class="photo" onclick="(function(){ window.open('/img/album/${photo.id}.png', '_blank').focus()})()" src="/img/album/thumb-${photo.id}.png" loading="lazy" alt"${new Date(photo.date).toLocaleString()}: ${escapeHTML(photo.description)}" title="${new Date(
+      `<img class="${className}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt"${new Date(photo.date).toLocaleString()}: ${escapeHTML(photo.description)}" title="${new Date(
         photo.date,
       ).toLocaleString()}: ${escapeHTML(photo.description)}">`;
 
@@ -62,7 +62,7 @@
       .replace(/\'/g, "&#039;");
   }
 
-  for(const photo of tempPhotos) {
+  for(const photo of photoData.photos) {
     addToGrid(photo);
   }
 })();
