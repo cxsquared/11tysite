@@ -10,9 +10,30 @@
 
   const maxColumn = columns.length
   const maxRows = 2
+  const imagesPerPage = maxRows * maxColumn
 
   let currentColumn = 0
   let currentRow = 0
+
+  let currentPage = 0;
+  const maxPages = Math.floor(photoData.photos.length / imagesPerPage)
+
+  function clearPhotoGrid() {
+    for (let c = 0; c < maxColumn; c++) {
+      const column = columns[c]
+      if (!column)
+        continue
+
+      const rows = column.getElementsByClassName("row") 
+      for (let r = 0; r < maxRows; r++) {
+        const row = rows[r]
+        if (!row)
+          continue
+
+        row.innerHTML = "";
+      }
+    }
+  }
 
   function addToGrid(photo) {
     let column = columns[currentColumn]
@@ -60,7 +81,39 @@
       .replace(/\'/g, "&#039;");
   }
 
-  for(const photo of photoData.photos) {
-    addToGrid(photo);
+  function updateVisiblePhotos() {
+    clearPhotoGrid();
+    const start = currentPage * imagesPerPage
+    const end = Math.min(start + imagesPerPage, photoData.photos.length);
+    for(const photo of photoData.photos.slice(start, end)) {
+      addToGrid(photo);
+    }
   }
+
+  function prevPage() {
+    currentPage = Math.max(currentPage - 1, 0)
+    currentColumn = 0
+    currentRow = 0
+    updateVisiblePhotos()
+  }
+
+  function nextPage() {
+    currentPage = Math.min(currentPage + 1, maxPages)
+    currentColumn = 0
+    currentRow = 0
+    updateVisiblePhotos()
+  }
+
+  document.addEventListener("keydown", async (e) => {
+    // LEFT
+    if (e.code === 'ArrowRight' || e.code === 'KeyK' || e.code === 'KeyD') {
+       nextPage();
+    }
+    // RIGHT
+    if (e.code === 'ArrowLeft' || e.code === 'KeyJ' || e.code === 'KeyA') {
+      prevPage();
+    }
+  })
+
+  updateVisiblePhotos();
 })();
