@@ -1,0 +1,12 @@
+#album-page {
+  margin: auto;
+}
+
+#album-page > .bi {
+  height: 500px;
+  width: 904px;
+  border: 10px solid black;
+  border-image-source: url(/images/album_board.png);
+  border-image-slice: 10;
+  background-image: url(/images/album_board_bg.png);
+}

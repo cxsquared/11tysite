@@ -1,4 +1,5 @@
 import path from "path";
+import { glob } from "glob";
 import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
@@ -13,6 +14,7 @@ import pluginDrafts from "./eleventy.config.drafts.js";
 import pluginImages from "./eleventy.config.images.js";
 import metadata from "./_data/metadata.js";
 import { RenderPlugin } from "@11ty/eleventy";
+import * as cheerio from "cheerio";
 
 export default async function (eleventyConfig) {
   // Copy the contents of the `public` folder to the output folder
@@ -184,6 +186,32 @@ export default async function (eleventyConfig) {
     return collectionsApi.getAll();
   });
 
+  /*
+  // Better style sheets - https://kittygiraudel.com/2026/05/11/styles-in-11ty-again/
+  eleventyConfig.addTransform("styles", (content, outputPath) => {
+    if (typeof outputPath !== "string" || !outputPath.endsWith(".html"))
+      return content;
+
+    const $ = cheerio.load(content);
+    const $head = $("head");
+    const cache = new Set();
+    const $styles = $('body :is(link[rel="stylesheet"], style[data-href])');
+
+    $styles.each((_, el) => {
+      const $el = $(el);
+      const key = $el.attr("data-href") || $el.attr("href");
+      const $style = $el.remove();
+
+      if (!cache.has(key)) {
+        $head.append($style);
+        cache.add(key);
+      }
+    });
+
+    return $.html();
+  });
+    */
+
   // Features to make your build faster (when you need them)
 
   // If your passthrough copy gets heavy and cumbersome, add this line
@@ -191,6 +219,23 @@ export default async function (eleventyConfig) {
   // https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
   // eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+
+  eleventyConfig.addCollection("images", async (collectionApi) => {
+    let files = await glob("./img/*.jpeg");
+    //Now filter to non thumb-
+    let images = files.filter((f) => {
+      return f.indexOf("./img/thumb-") !== 0;
+    });
+
+    let collection = images.map((i) => {
+      return {
+        path: i,
+        thumbpath: i.replace("./img/", "./img/thumb-"),
+      };
+    });
+
+    return collection;
+  });
 
   return {
     // Control which files Eleventy will process

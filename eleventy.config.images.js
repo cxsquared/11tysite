@@ -1,6 +1,33 @@
 import path from "path";
-import eleventyImage from "@11ty/eleventy-img";
+import { glob } from "glob";
+import Image, { generateHTML } from "@11ty/eleventy-img";
 
+const THUMB = 250;
+const FULL = 650;
+
+async function generateImages(eleventyConfig) {
+  let options = {
+    widths: [THUMB, FULL],
+    formats: ["png"],
+    outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
+    filenameFormat: function (id, src, width, format, options) {
+      let origFilename = src.split("/").pop();
+      //strip off the file type, this could probably be one line of fancier JS
+      let parts = origFilename.split(".");
+      parts.pop();
+      origFilename = parts.join(".");
+
+      if (width === THUMB) return `thumb-${origFilename}.${format}`;
+      else return `${origFilename}.${format}`;
+    },
+  };
+
+  let files = await glob("./rawphotos/*.{jpg,jpeg,png,gif}");
+  for (const f of files) {
+    console.log("doing f", f);
+    let md = await Image(f, options);
+  }
+}
 export function relativeToInputPath(inputPath, relativeFilePath) {
   let split = inputPath.split("/");
   split.pop();
@@ -18,6 +45,12 @@ export function isFullUrl(url) {
 }
 
 export default function (eleventyConfig) {
+  eleventyConfig.on("beforeBuild", async () => {
+    console.log("beforeBuild");
+    await generateImages(eleventyConfig);
+    console.log("images done");
+  });
+
   // Eleventy Image shortcode
   // https://www.11ty.dev/docs/plugins/image/
   eleventyConfig.addAsyncShortcode(
@@ -44,7 +77,7 @@ export default function (eleventyConfig) {
         sharpOptions.animated = true;
       }
 
-      let metadata = await eleventyImage(input, {
+      let metadata = await Image(input, {
         widths: widths || ["auto"],
         formats,
         sharpOptions,
@@ -59,7 +92,7 @@ export default function (eleventyConfig) {
         decoding: "async",
       };
 
-      return eleventyImage.generateHTML(metadata, imageAttributes);
+      return generateHTML(metadata, imageAttributes);
     },
   );
 }

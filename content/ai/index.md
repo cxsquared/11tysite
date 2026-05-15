@@ -1,6 +1,7 @@
 ---
 permalink: /ai/
 layout: layouts/post.njk
+eleventyExcludeFromCollections: true
 ---
 
 # My Artificial Intelligence Policy
