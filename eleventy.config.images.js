@@ -1,5 +1,5 @@
 import Image, { generateHTML } from "@11ty/eleventy-img";
-import console from "console";
+import console, { profile } from "console";
 import { glob } from "glob";
 import path from "path";
 import exifr from 'exifr'
@@ -7,15 +7,6 @@ import { DateTime } from "luxon";
 
 const THUMB = 250;
 const FULL = 650;
-
-// {
-//     id: int,
-//     camera: string,
-//     
-//     date: Date.now(),
-//     description: "this is a test",
-//     vertical: true
-// }
 
 async function generateImages(eleventyConfig) {
   const processedPhotos = [] 
@@ -48,7 +39,7 @@ async function generateImages(eleventyConfig) {
       thumb_url: md.png[0].url,
       camera: exifData.Model,
       vertical: isVertical,
-      date: DateTime.fromISO(exifData.CreateDate).toUnixInteger(),
+      takenAt: DateTime.fromJSDate(exifData.CreateDate).toUnixInteger(),
       iso: exifData.ISO,
       shutterSpeed: exifData.ShutterSpeedValue,
       aperture: exifData.ApertureValue,

@@ -30,25 +30,23 @@
     let row = rows[currentRow]
 
     if (!row) {
-      currentColumn = (currentColumn + 1) % maxColumn
       currentRow = 0
       addToGrid(photo)
       return
     }
 
     const className = photo.vertical ? "photo vertical" : "photo";
+    const localDate = new Date(photo.takenAt * 1000).toLocaleString() // * 1000 cause I hate JS (they want miliseconds not seconds)
 
     row.innerHTML =
       /*html*/
-      `<img class="${className}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt"${new Date(photo.date).toLocaleString()}: ${escapeHTML(photo.description)}" title="${new Date(
-        photo.date,
-      ).toLocaleString()}: ${escapeHTML(photo.description)}">`;
+      `<img class="${className}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt="${localDate}: ${escapeHTML(photo.description)}" title="${localDate}: ${escapeHTML(photo.description)}">`;
 
-    currentRow++
+    currentColumn++
 
-    if (currentRow >= maxRows) {
-      currentColumn = (currentColumn + 1) % maxColumn
-      currentRow = 0
+    if (currentColumn >= maxColumn) {
+      currentColumn = 0 
+      currentRow = (currentRow + 1) % maxRows 
     }
   }
 

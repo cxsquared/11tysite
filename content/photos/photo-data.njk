@@ -5,13 +5,13 @@
 ---
 {
  "photos": [
-    {%- for photo in collections.albumPhotos %}
+    {%- for photo in collections.albumPhotos | sortByDate %}
     {
       "full_url": "{{ photo.full_url }}",
       "thumb_url": "{{ photo.thumb_url }}",
       "camera": "{{ photo.camera }}",
       "vertical": {{ photo.vertical }},
-      "date": "{{ photo.date }}",
+      "takenAt": {{ photo.takenAt }},
       "iso": "{{ photo.iso }}",
       "shutterSpeed": "{{ photo.shutterSpeed }}",
       "aperture": "{{ photo.aperture }}",

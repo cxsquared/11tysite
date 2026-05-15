@@ -122,6 +122,11 @@ export default async function (eleventyConfig) {
     return JSON.stringify(json);
   });
 
+  eleventyConfig.addFilter("sortByDate", function (collection) {
+    const sorted = Array.from(collection)
+    return sorted.sort((a, b) => b.takenAt - a.takenAt)
+  });
+
   eleventyConfig.setLibrary(
     "md",
     markdownIt({
