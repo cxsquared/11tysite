@@ -13,6 +13,7 @@ export default {
     shortname: "codyclaborn",
   },
   updates: [
+    "5/16 - Cooler 404, better footer locaiton, and some photo album progress",
     "5/13 - Changing up sidebar and new post",
     "1/20 - New games.",
     "9/11 - Cleaned up playable games on the site. Guest book link. And removed Disqus.",
