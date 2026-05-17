@@ -2,6 +2,10 @@
   --scale: 2
 }
 
+#board {
+  overflow: hidden;
+}
+
 #album-page {
   margin: auto;
 }
@@ -9,27 +13,53 @@
 #album-page > .bi {
   /* height: 500px; */
   /* width: 904px; */
-  border: 10px solid black;
-  border-image-source: url(/images/album_board.png);
-  border-image-slice: 10;
-  background-image: url(/images/album_board_bg.png);
+  border: 20px solid black;
+  border-image-source: url(/img/album_board.png);
+  border-image-slice: 8;
+  background-image: url(/img/album_board_bg.png);
 }
 
 .photo {
   max-height: 200px;
   border: 8px solid white;
-  border-image-source: url(/images/pol_bg.png);
   border-image-slice: 8;
-  border-bottom: 32px solid white;
+  border-bottom: 0px solid white;
 } 
 
 .photo.vertical {
-  border-right: 32px solid white;
+  border-right: 0px solid white;
   border-bottom: 8px solid white;
 }
 
+.photo-container .date {
+  display: block;
+  width: 100%;
+  color: black;
+  text-align: center;
+  margin-top: -8px;
+  background-color: white;
+  height: 32px;
+  border: 8px solid white;
+}
+
+.photo-container.vertical {
+  display: flex;
+  align-items: center;
+  margin-left: 4vw;
+}
+
+.photo-container.vertical .date {
+    display: block;
+    color: black;
+    transform: translate(-42%, 0px) rotate(-90deg);
+    margin-top: 0;
+    width: 14.8vw;
+}
+
 .column > .row {
-  margin: auto
+  margin: auto;
+  padding-top: 30px;
+  min-height: 200px;
 }
 
 .column {
@@ -40,7 +70,7 @@
 }
 
 .column-low {
-  margin-top: 64px;
+  margin-top: 60px;
 }
 
 #photos {

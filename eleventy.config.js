@@ -1,5 +1,4 @@
 import path from "path";
-import { glob } from "glob";
 import { DateTime } from "luxon";
 import markdownIt from "markdown-it";
 import markdownItAnchor from "markdown-it-anchor";
@@ -24,13 +23,14 @@ export default async function (eleventyConfig) {
 
   // Run Eleventy when these files change:
   // https://www.11ty.dev/docs/watch-serve/#add-your-own-watch-targets
+  
+  // App plugins
+  await eleventyConfig.addPlugin(pluginDrafts);
+  await eleventyConfig.addPlugin(pluginImages);
 
   // Watch content images for the image pipeline.
   eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
-
-  // App plugins
-  eleventyConfig.addPlugin(pluginDrafts);
-  eleventyConfig.addPlugin(pluginImages);
+  eleventyConfig.addWatchTarget("rawphotos/**/*.{svg,webp,png,jpeg}");
 
   // Official plugins
   eleventyConfig.addPlugin(pluginRss);
@@ -142,8 +142,8 @@ export default async function (eleventyConfig) {
       .use(markdownItEleventyImg, {
         imgOptions: {
           widths: [600, 300],
-          urlPath: "/images/",
-          outputDir: "./_site/images/",
+          urlPath: "/img/",
+          outputDir: "./_site/img/",
           formats: ["auto"],
           sharpOptions: {
             animated: true,
@@ -222,23 +222,6 @@ export default async function (eleventyConfig) {
   // https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
   // eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
-
-  eleventyConfig.addCollection("images", async (collectionApi) => {
-    let files = await glob("./img/*.jpeg");
-    //Now filter to non thumb-
-    let images = files.filter((f) => {
-      return f.indexOf("./img/thumb-") !== 0;
-    });
-
-    let collection = images.map((i) => {
-      return {
-        path: i,
-        thumbpath: i.replace("./img/", "./img/thumb-"),
-      };
-    });
-
-    return collection;
-  });
 
   return {
     // Control which files Eleventy will process

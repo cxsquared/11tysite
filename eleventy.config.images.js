@@ -1,5 +1,5 @@
 import Image, { generateHTML } from "@11ty/eleventy-img";
-import console, { profile } from "console";
+import console from "console";
 import { glob } from "glob";
 import path from "path";
 import exifr from 'exifr'
@@ -50,9 +50,7 @@ async function generateImages(eleventyConfig) {
   }
   console.log(`processed ${processedPhotos.length} photos`);
 
-	await eleventyConfig.addCollection("albumPhotos", async (_collectionsApi) => {
-		return processedPhotos;
-	});
+  return processedPhotos
 }
 
 export function relativeToInputPath(inputPath, relativeFilePath) {
@@ -71,12 +69,18 @@ export function isFullUrl(url) {
   }
 }
 
-export default function (eleventyConfig) {
+export default async function (eleventyConfig) {
+  let photoCollection = []
+
   eleventyConfig.on("beforeBuild", async () => {
     console.log("beforeBuild");
-    await generateImages(eleventyConfig);
+    photoCollection = await generateImages(eleventyConfig);
     console.log("images done");
   });
+
+	await eleventyConfig.addCollection("albumPhotos", async (_collectionsApi) => {
+		return photoCollection;
+	});
 
   // Eleventy Image shortcode
   // https://www.11ty.dev/docs/plugins/image/

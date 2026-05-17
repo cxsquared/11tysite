@@ -27,7 +27,7 @@
   --syntax-tab-size: 2;
 
   --header-img: url("https://cdn.pixabay.com/animation/2023/10/24/13/50/13-50-26-112_256.gif");
-  --background-img: url("/images/bg_small.png");
+  --background-img: url("/img/bg_small.png");
 }
 
 @media (prefers-color-scheme: dark) {

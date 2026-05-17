@@ -56,12 +56,12 @@
       return
     }
 
-    const className = photo.vertical ? "photo vertical" : "photo";
+    const verticalClassName = photo.vertical ? " vertical" : "";
     const localDate = new Date(photo.takenAt * 1000).toLocaleString() // * 1000 cause I hate JS (they want miliseconds not seconds)
 
     row.innerHTML =
       /*html*/
-      `<img class="${className}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt="${localDate}: ${escapeHTML(photo.description)}" title="${localDate}: ${escapeHTML(photo.description)}">`;
+      `<div class="photo-container${verticalClassName}"><img class="photo${verticalClassName}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt="${localDate}: ${escapeHTML(photo.description)}" title="${localDate}: ${escapeHTML(photo.description)}"><span class="date">${localDate}</span></div>`;
 
     currentColumn++
 
