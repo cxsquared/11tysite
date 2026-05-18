@@ -1,5 +1,24 @@
 (async () => {
   const columns = document.getElementsByClassName("column")
+  const prevArrow = document.getElementById("left-arrow") 
+  const nextArrow = document.getElementById("right-arrow") 
+
+  prevArrow.style.display = 'none'
+  nextArrow.style.display = 'none'
+
+  prevArrow.addEventListener('click', () => {
+    if (prevArrow.style.display === 'none')
+      return
+
+    prevPage();
+  })
+
+  nextArrow.addEventListener('click', () => {
+    if (nextArrow.style.display === 'none')
+      return
+
+    nextPage();
+  })
 
   const photoDataResponse = await fetch("/photos/data.json")
 
@@ -35,6 +54,19 @@
     }
   }
 
+  function updateArrow() {
+    prevArrow.style.display = 'initial'
+    nextArrow.style.display = 'initial'
+
+    if(currentPage <= 0) {
+      prevArrow.style.display = 'none'
+    }
+
+    if(currentPage >= maxPages) {
+      nextArrow.style.display = 'none'
+    }
+  }
+
   function addToGrid(photo) {
     let column = columns[currentColumn]
 
@@ -58,10 +90,11 @@
 
     const verticalClassName = photo.vertical ? " vertical" : "";
     const localDate = new Date(photo.takenAt * 1000).toLocaleString() // * 1000 cause I hate JS (they want miliseconds not seconds)
+    let description = photo.description && photo.description !== '' ? `${localDate}: ${escapeHTML(photo.description)}` : localDate;
 
     row.innerHTML =
       /*html*/
-      `<div class="photo-container${verticalClassName}"><img class="photo${verticalClassName}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt="${localDate}: ${escapeHTML(photo.description)}" title="${localDate}: ${escapeHTML(photo.description)}"><span class="date">${localDate}</span></div>`;
+      `<div class="photo-container${verticalClassName}"><img class="photo${verticalClassName}" onclick="(function(){ window.open('${photo.full_url}', '_blank').focus()})()" src="${photo.thumb_url}" loading="lazy" alt="${description}" title="${description}"><span class="date">${localDate}</span></div>`;
 
     currentColumn++
 
@@ -88,6 +121,7 @@
     for(const photo of photoData.photos.slice(start, end)) {
       addToGrid(photo);
     }
+    updateArrow();
   }
 
   function prevPage() {

@@ -284,6 +284,11 @@ header {
   padding: 1em;
 }
 
+header.home-header {
+  gap: 0;
+  padding-bottom: 0;
+}
+
 #header-image {
   background-image: var(--header-img);
   background-size: cover;

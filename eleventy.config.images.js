@@ -4,9 +4,18 @@ import { glob } from "glob";
 import path from "path";
 import exifr from 'exifr'
 import { DateTime } from "luxon";
+import photoDescriptions from "./photo_descriptions.js"
 
 const THUMB = 250;
 const FULL = 650;
+
+function getFileName(f) {
+  let origFilename = f.split("/").pop();
+  //strip off the file type, this could probably be one line of fancier JS
+  let parts = origFilename.split(".");
+  parts.pop();
+  return parts.join(".");
+}
 
 async function generateImages(eleventyConfig) {
   const processedPhotos = [] 
@@ -15,11 +24,7 @@ async function generateImages(eleventyConfig) {
     formats: ["png"],
     outputDir: path.join(eleventyConfig.dir.output, "img"), // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
     filenameFormat: function (_id, src, width, format, _options) {
-      let origFilename = src.split("/").pop();
-      //strip off the file type, this could probably be one line of fancier JS
-      let parts = origFilename.split(".");
-      parts.pop();
-      origFilename = parts.join(".");
+      const origFilename = getFileName(src); 
 
       if (width === THUMB) return `album/thumb-${origFilename}.${format}`;
       else return `album/${origFilename}.${format}`;
@@ -32,8 +37,11 @@ async function generateImages(eleventyConfig) {
     // Save image
     const md = await Image(f, options);
 
+    const fileName = getFileName(f).split('/').pop(); // grab just the name ignoring path
+
     const exifData = await exifr.parse(f)
     const isVertical = md.png[0].width < md.png[0].height
+    const description = photoDescriptions[fileName] ? photoDescriptions[fileName] : "";
     const data = {
       full_url: md.png[1].url,
       thumb_url: md.png[0].url,
@@ -43,7 +51,7 @@ async function generateImages(eleventyConfig) {
       iso: exifData.ISO,
       shutterSpeed: exifData.ShutterSpeedValue,
       aperture: exifData.ApertureValue,
-      description: "",
+      description: description,
     }
 
     processedPhotos.push(data)
