@@ -6,6 +6,8 @@ eleventyNavigation:
 numberOfLatestPostsToShow: 3
 ---
 
+<button id="mobile-menu-toggle" class="box" type="button" aria-expanded=false>MENU</button>
+
 {# Main content #}
 <div style="flex: 1">
     <div class="box">
@@ -131,7 +133,7 @@ numberOfLatestPostsToShow: 3
     </div>
 </div>
 {# Side Bar #}
-<div class="container" style="min-width: 30%; max-width: 30%">
+<div id="menu" class="container container-third">
     <div class="box">
         <div class="boxhead">
             <h2>Class Rooms</h2>
@@ -280,10 +282,40 @@ numberOfLatestPostsToShow: 3
 </script>
 
 <script>
-    window.onload = (event) => {
+    (() => {
+        // Lucky page
         const pages = JSON.parse(document.querySelector("#all-pages").textContent);
         const random = pages[Math.floor(Math.random() * pages.length)];
 
         document.getElementById('luck').href = `${window.location.origin}${random}`;
-    };
+
+        // Mobile Menu
+        const toggle = document.getElementById("mobile-menu-toggle");
+        if(!toggle) return;
+
+        const closeMenu = () => {
+            document.body.classList.remove("mobile-menu-open");
+            toggle.setAttribute("aria-expanded", "false");
+            backdrop.hidden = true;
+        };
+
+        const setMenuOpen = open => {
+            document.body.classList.toggle("mobile-menu-open", open);
+            toggle.setAttribute("aria-expanded", open ? "true" : "false");
+            backdrop.hidden = !open;
+        };
+
+        toggle.addEventListener("click", () => {
+            setMenuOpen(!document.body.classList.contains("mobile-menu-open"));
+        });
+        backdrop.addEventListener("click", closeMenu);
+        document.addEventListener("keydown", e => {
+            if(e.key === "Escape") closeMenu();
+        });
+        window.addEventListener("resize", () => {
+            if(window.innerWidth > 550) closeMenu();
+        });
+    })();
 </script>
+
+
