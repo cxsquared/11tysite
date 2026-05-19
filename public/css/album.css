@@ -1,103 +1,143 @@
-:root {
-  --scale: 2
-}
-
-#board {
-  overflow: hidden;
-  grid-column-start: 1;
-  grid-row-start: 1;
-}
-
 #album-page {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
   margin: auto;
-}
 
-#album-page .arrow {
-  transform: scale(1.5);
-  grid-column-start: 1;
-  grid-row-start: 1;
-  width: fit-content;
-}
-
-#album-page #left-arrow {
-  margin-left: -25px; 
-  margin-right: auto;
-}
-
-#album-page #right-arrow {
-  transform: scale(1.5) scaleX(-1);
-  margin-right: -25px; 
-  margin-left: auto; 
-}
-
-#album-page > .bi {
-  border: 20px solid black;
-  border-image-source: url(/img/album_board.png);
-  border-image-slice: 8;
-  background-image: url(/img/album_board_bg.png);
-}
-
-#album-page {
-  h1 {
-    justify-self: center;
+  & h1 {
     padding-top: 15px;
     font-size: 3rem;
     margin-bottom: -100px;
+    text-align: center;
     -webkit-text-stroke: black 1px;
   }
-}
 
-.photo.vertical {
-  border-right: 0;
-  border-left: 0;
-}
+  #board {
+    overflow: hidden;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    border: 20px solid black;
+    border-image-source: url(/img/album_board.png);
+    border-image-slice: 8;
+    background-image: url(/img/album_board_bg.png);
+  }
 
-.photo {
-  max-height: 180px;
-  border: 8px solid white;
-  border-image-slice: 8;
-  border-bottom: 0px solid white;
-} 
+  .arrow {
+    transform: scale(1.5);
+    grid-column-start: 1;
+    grid-row-start: 1;
+    width: fit-content;
+  }
 
-.photo-container .date {
-  display: block;
-  width: 100%;
-  color: black;
-  text-align: center;
-  margin-top: -8px;
-  background-color: white;
-  height: 32px;
-  border: 8px solid white;
-}
+  #left-arrow {
+    margin-left: -25px; 
+    margin-right: auto;
+  }
 
-.photo-container.vertical {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-image: url(/img/pol_bg.png);
-  background-repeat: round;
-}
+  #right-arrow {
+    transform: scale(1.5) scaleX(-1);
+    margin-right: -25px; 
+    margin-left: auto; 
+  }
 
-.column > .row {
-  margin: auto;
-  padding-top: 30px;
-  min-height: 200px;
-}
+  .photo.vertical {
+    border-right: 0;
+    border-left: 0;
+  }
 
-.column {
-  display: flex;
-  flex-direction: column;
-  width: 277px;
-  padding: 16px 8px;
-}
+  .photo {
+    max-height: 180px;
+    border: 8px solid white;
+    border-image-slice: 8;
+    border-bottom: 0px solid white;
+  } 
 
-.column-low {
-  margin-top: 60px;
-}
+  .photo-container .date {
+    display: block;
+    width: 100%;
+    color: black;
+    text-align: center;
+    margin-top: -8px;
+    background-color: white;
+    height: 32px;
+    border: 8px solid white;
+  }
 
-#photos {
-  display: flex;
+  .photo-container.vertical {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(/img/pol_bg.png);
+    background-repeat: round;
+  }
+
+  .column > .row {
+    margin: auto;
+    padding-top: 30px;
+    min-height: 200px;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    width: 277px;
+    padding: 16px 8px;
+  }
+
+  .column-low {
+    margin-top: 60px;
+  }
+
+  #photos {
+    display: flex;
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+
+    & h1 {
+      margin: 0;
+      padding: 15px 0;
+    }
+
+    #board {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #photos {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .column {
+      width: 100%;
+      padding: 0;
+
+      & .row {
+        padding: 8px 0;
+      }
+    }
+
+    .column-low {
+      margin-top: 0;
+    }
+
+    .arrow {
+      align-self: baseline;
+      margin-top: 42px;
+    }
+
+    #left-arrow {
+      margin-left: 42px; 
+      margin-right: auto;
+    }
+
+    #right-arrow {
+      transform: scale(1.5) scaleX(-1);
+      margin-right: 42px; 
+      margin-left: auto; 
+    }
+  }
 }
