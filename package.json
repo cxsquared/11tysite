@@ -17,7 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "11ty.ts": "^0.0.7",
-    "@11ty/eleventy": "^3.1.5",
+    "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-navigation": "^1.0.5",
     "@11ty/eleventy-plugin-bundle": "^3.0.7",
@@ -36,7 +36,7 @@
     "eleventy-plugin-syntaxhighlight": "link:@types/@11ty/eleventy-plugin-syntaxhighlight",
     "glob": "^13.0.6",
     "luxon": "^3.7.2",
-    "markdown-it": "^14.1.1",
+    "markdown-it": "^14.2.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-eleventy-img": "^0.10.2",
     "prismjs": "^1.30.0"
