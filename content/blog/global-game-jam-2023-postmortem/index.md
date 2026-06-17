@@ -15,7 +15,10 @@ image: tree_spin.gif
 comments: true
 ---
 
-Disclaimer: I don't think this will be "educational" in really anyway. I do appreciate if you do decide to stick around and read my ramblings. Hopefully it can at least inspire some movement inside your brain for future projects.
+
+>*Disclaimer: I don't think this will be "educational" in really anyway. I do appreciate if you do decide to stick around and read my ramblings. Hopefully it can at least inspire some movement inside your brain for future projects.*
+
+---
 
 Holly crap it's been 9 years since I did my first Global Game Jam! After all those years I feel like this was one of my most successful games yet. For those who don't know, Global Game Jam is an event that takes place over 28 hours (typically on the weekend) where teams/individuals make a game from scratch. Let's look back at how I got here and why I'm happy with how this years Global Game Jam turned out.
 

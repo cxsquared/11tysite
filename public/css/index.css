@@ -219,10 +219,6 @@ main {
   padding-bottom: 66px;
 }
 
-main :first-child {
-  margin-top: 0;
-}
-
 header {
   border-bottom: 1px dashed var(--color-gray-20);
 }
@@ -503,6 +499,18 @@ h2 + .header-anchor {
   height: 32px;
 }
 
+.postbody .post p {
+  font-size: 1.25em;
+}
+
+.postbody .post h1 {
+  font-size: 3.5em;
+}
+
+.postbody .post h2 {
+  font-size: 2.5em;
+}
+
 .box .boxhead {
   border-bottom: #aaa dotted 3px;
   text-align: center;
@@ -511,12 +519,20 @@ h2 + .header-anchor {
 
 .box .boxbody {
   padding-top: 15px;
-  max-height: 310px;
+  max-height: 320px;
   overflow: auto;
 }
 
 .box.full-height .boxbody {
   max-height: none;
+}
+
+#mastodon_timeline {
+  max-height: none;
+}
+
+#masto-images img {
+  width: 100%;
 }
 
 .blogpost {
@@ -554,7 +570,7 @@ h2 + .header-anchor {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  height: 220px;
+  height: 300px;
 }
 
 div.mostrecent-item {
@@ -568,6 +584,7 @@ div.mostrecent-item > a {
 .boxbody.mostrecent h4 {
   text-wrap: wrap;
   width: 100px;
+  margin-bottom: 3px;
 }
 
 .splitcontainer {
