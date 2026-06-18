@@ -189,6 +189,15 @@ export default async function (eleventyConfig) {
     return collectionsApi.getAll();
   });
 
+  eleventyConfig.addCollection("allContent", async (collectionsApi) => {
+    const posts = collectionsApi.getFilteredByTag("posts")
+    const games = collectionsApi.getFilteredByTag("games")
+    const tutorials = collectionsApi.getFilteredByTag("tutorials")
+    return posts.concat(games).concat(tutorials).sort(function(a, b) {
+      return a.date - b.date;
+    });
+  });
+
   /*
   // Better style sheets - https://kittygiraudel.com/2026/05/11/styles-in-11ty-again/
   eleventyConfig.addTransform("styles", (content, outputPath) => {

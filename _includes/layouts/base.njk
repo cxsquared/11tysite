@@ -8,13 +8,14 @@
         <meta
         name="description" content="{{ description or metadata.description }}">
         
-        {#- Atom and JSON feeds included by default #}
-        <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="{{ metadata.title }}">
-        <link href="https://i.imgur.com/gJroawV.png" rel="icon" type="image/x-icon">
+        {#- Atom and JSON feeds #}
+        <link rel="alternate" href="/feeds/all.xml" title="{{metadata.title}} | Everything" type="application/atom+xml" />
+        <link rel="alternate" href="/feeds/blog.xml" title="{{metadata.title}} | Just Blog Posts" type="application/atom+xml" />
+        <link rel="alternate" href="/feeds/games.xml" title="{{metadata.title}} | Just Games" type="application/atom+xml" />
+        <link rel="alternate" href="/feeds/tutorials.xml" title="{{metadata.title}} | Just Tutorials" type="application/atom+xml" />
  
+        {# Fonts #}
         <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet" type="text/css">
-        <link
-        rel="alternate" href="/feed/feed.json" type="application/json" title="{{ metadata.title }}">
         
         {#- Uncomment this if you’d like folks to know that you used Eleventy to build your site!  #}
         <meta name="generator" content="{{ eleventy.generator }}">
@@ -24,9 +25,13 @@
         <link href="mailto:cxsquared@gmail.com" rel="me">
         <link rel="webmention" href="https://webmention.io/codyclaborn.me/webmention" />
 
+        {#- Fediverse info #}
+        <meta name="fediverse:creator" content="@cxsquared@mastodon.gamedev.place">
+        <a rel="me" style="display: none;" href="https://mastodon.gamedev.place/@cxsquared">Mastodon</a>
+
         {#- Human #}
         <link rel="human-json" href="/human.json">
-        
+
         {#-
         CSS bundles are provided via the `eleventy-plugin-bundle` plugin:
         1. You can add to them using `{% css %}`
@@ -94,7 +99,7 @@
                         <span>CODYCLABORN.ME V0.999...</span>
                     </p>
                     <p>
-                        <a href="/feed.xml"><span>FEED</span></a> | <a href="/sitemap.xml"><span>SITEMAP</span></a> | <a href="/archive/"><span>ARCHIVE</span></a> | <a href="mailto:cxsquared@gmail.com"><span>CONTACT</span></a> | <span>POWERED BY <a href="11ty.dev">11ty.dev</a></span>
+                        <a href="/feeds/"><span>FEEDS</span></a> | <a href="/sitemap.xml"><span>SITEMAP</span></a> | <a href="/archive/"><span>ARCHIVE</span></a> | <a href="mailto:cxsquared@gmail.com"><span>CONTACT</span></a> | <span>POWERED BY <a href="11ty.dev">11ty.dev</a></span>
                     </p>
                 </div>
            </footer>

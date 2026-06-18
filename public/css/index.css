@@ -519,7 +519,6 @@ h2 + .header-anchor {
 
 .box .boxbody {
   padding-top: 15px;
-  max-height: 320px;
   overflow: auto;
 }
 
@@ -570,7 +569,6 @@ h2 + .header-anchor {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  height: 300px;
 }
 
 div.mostrecent-item {
@@ -773,7 +771,7 @@ a.rainbow_text_animated {
 
 #here {
   position: absolute;
-  margin-top: 19px;
+  margin-top: 46px;
   margin-left: 13rem;
 }
 
@@ -785,14 +783,10 @@ a.rainbow_text_animated {
 }
 
 #markers {
-  position: absolute;
-  margin-top: 309px;
   margin-left: 0.5rem;
 }
 
 #hang {
-  position: absolute;
-  margin-top: 256px;
   margin-left: 12rem;
 }
 

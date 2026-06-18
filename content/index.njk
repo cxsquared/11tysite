@@ -4,6 +4,7 @@ eleventyNavigation:
     key: Home
     order: 1
 numberOfLatestPostsToShow: 3
+numberOfGamesToShow: 4
 ---
 
 <button id="mobile-menu-toggle" class="box" type="button" aria-expanded=false>MENU</button>
@@ -38,24 +39,37 @@ numberOfLatestPostsToShow: 3
     <div class="splitcontainer">
         <div class="box half">
             <div class="boxhead">
-                <h2>Recent Projects</h2>
+                <h2>Recent Games</h2>
             </div>
             <div class="boxbody mostrecent" style="text-align: center;">
                 {# List every content page in the project #}
-                {% set mostRecentGames = collections.games | reverse | head(4) %}
+                {% set gamesCount = collections.games | length %}
+                {% set latestGamesCount = gamesCount | min(numberOfGamesToShow) %}
+                {% set mostRecentGames = collections.games | reverse | head(numberOfGamesToShow) %}
+
                 {% for mostRecentGame in mostRecentGames %}
-                {% set mostRecentGameImgLocation = mostRecentGame.inputPath | inputPathDir %}
-                <div class="mostrecent-item">
-                    <a href="{{ mostRecentGame.url }}">
-                        <h4>{{ mostRecentGame.data.title }}</h4>
-                        {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image, mostRecentGame.data.title,
-                        ["100"] %}
-                    </a>
-                </div>
+                    {% set mostRecentGameImgLocation = mostRecentGame.inputPath | inputPathDir %}
+                    <div class="mostrecent-item">
+                        <a href="{{ mostRecentGame.url }}">
+                            <h4>{{ mostRecentGame.data.title }}</h4>
+                            {% image mostRecentGameImgLocation + "/" + mostRecentGame.data.image, mostRecentGame.data.title,
+                            ["100"] %}
+                        </a>
+                    </div>
                 {% endfor %}
-            </div>
-        </div>
-        <div class="box half">
+
+                {% set moreGames = gamesCount - numberOfGamesToShow %}
+                {% if moreGames > 0 %}
+                  <p>
+                  {{ moreGames }} more games{% if moreGames != 1 %}s{% endif %}
+                  can be found
+                  in
+                  <a href="/games/">the game room</a>.
+                  </p>
+              {% endif %}
+         </div>
+       </div>
+       <div class="box half">
             <img id="here" src="/img/here.png">
             <img id="heart" src="/img/heart.png">
             {% set nowdoing = media.now | getRandom %}
@@ -90,14 +104,12 @@ numberOfLatestPostsToShow: 3
                 {{ morePosts }} more post{% if morePosts != 1 %}s{% endif %}
                 can be found
                 in
-                <a href="/blog/">the archive</a>.
+                <a href="/blog/">the blog hole</a>.
             </p>
             {% endif %}
         </div>
     </div>
     <div class="splitcontainer">
-        <img id="hang" src="/img/hang.png">
-        <img id="markers" src="/img/markers.png">
         <div class="box half">
             <div class="boxhead">
                 <h2>TO:DO</h2>
@@ -109,6 +121,8 @@ numberOfLatestPostsToShow: 3
                     {% endfor %}
                 </ul>
             </div>
+            <img id="hang" src="/img/hang.png">
+            <img id="markers" src="/img/markers.png">
         </div>
         <div class="box half">
             <div class="boxhead">
@@ -116,7 +130,7 @@ numberOfLatestPostsToShow: 3
             </div>
             <div class="boxbody">
                 <ul>
-                    {% for update in metadata.updates %}
+                    {% for update in metadata.updates | head(3) %}
                     <li>{{ update }}</li>
                     {% endfor %}
                 </ul>
@@ -168,7 +182,7 @@ numberOfLatestPostsToShow: 3
         <div class="boxbody" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
                     <a href="https://jvmerkle.de/"><img
                     src="/img/buttons/fuckai.gif"></a>
-            <a href="{{ metadata.url }}/feed/feed.xml"><img src="/img/buttons/rss.gif"></a>
+            <a href="{{ metadata.url }}/feeds/all.xml"><img src="/img/buttons/rss.gif"></a>
             <a href="https://penguinjaa.com/" target="_blank"><img
                     src="https://penguinjaa.com/images/buttons/neopenguinjaa.gif"></a>
             <a href="https://dimden.dev/"><img src="https://dimden.dev/services/images/88x31.gif"></a>

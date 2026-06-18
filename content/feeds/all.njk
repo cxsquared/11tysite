@@ -1,12 +1,15 @@
 ---json
 {
-  "permalink": "/feed.xml"
+  "permalink": "feeds/all.xml",
+  "eleventyImport": {
+    "collections": ["allContent"]
+  }
 }
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ metadata.language or page.lang }}">
   <title>{{ metadata.title }}</title>
-  <subtitle>{{ metadata.description }}</subtitle>
+  <subtitle>{{ metadata.description }} ... like all of it.</subtitle>
   <link href="{{ permalink | htmlBaseUrl(metadata.base) }}" rel="self" />
   <link href="{{ metadata.base | addPathPrefixToFullUrl }}" />
   <updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>

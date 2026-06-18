@@ -16,7 +16,7 @@
     }
   ],
   "items": [
-    {%- for post in collections.posts | reverse %}
+    {%- for post in collections.allContent | reverse %}
     {%- set absolutePostUrl %}{{ post.url | htmlBaseUrl(metadata.base) }}{% endset %}
     {
       "id": "{{ absolutePostUrl }}",
